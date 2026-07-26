@@ -15,5 +15,5 @@ notifications received, to view your profile and to manage the same. Options to 
 where you can even request for a new card, and check your bills
 The team members are: Mehrin AS (AM.SC.U4CSE25332)
                       Nithya Ajay (AM.SC.U4CSE25339)
-                      Rudra Rajagopal (AM.SC.U4CSE25342)
+                      Rudra Rajagopal (AM.SC.U4CSE25344)
                       Varun Nair (AM.SC.U4CSE25356)  
