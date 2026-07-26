@@ -1,0 +1,464 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon | Cards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Aureon
+                </a>
+
+            </div>
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="accounts.html">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Accounts</span>
+                </a>
+
+                <a href="transfer.html">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>Transfer</span>
+                </a>
+
+                <a href="transactions.html">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="beneficiaries.html">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Beneficiaries</span>
+                </a>
+
+                <a href="bills.html">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>Bills</span>
+                </a>
+
+                <a href="cards.html" class="active">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+
+                <a href="notifications.html">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+
+                <a href="profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <main class="dashboard-main">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h2>Cards Management</h2>
+
+                    <div class="breadcrumb">
+
+                        <a href="dashboard.html">Dashboard</a>
+
+                        <span>/</span>
+
+                        <span>Cards</span>
+
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Request New Card
+
+                </button>
+
+            </header>
+
+            <section class="card-grid">
+                <article class="glass-card bank-card-preview">
+
+                    <div class="card-header">
+
+                        <span>Aureon Debit Card</span>
+
+                        <i class="fa-brands fa-cc-mastercard"></i>
+
+                    </div>
+
+                    <div class="card-chip">
+
+                        <i class="fa-solid fa-microchip"></i>
+
+                    </div>
+
+                    <h2>**** **** **** 4821</h2>
+
+                    <div class="card-footer">
+
+                        <div>
+
+                            <small>Card Holder</small>
+
+                            <h4>John Doe</h4>
+
+                        </div>
+
+                        <div>
+
+                            <small>Expires</small>
+
+                            <h4>08/30</h4>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <article class="glass-card bank-card-preview virtual-card">
+
+                    <div class="card-header">
+
+                        <span>Virtual Card</span>
+
+                        <i class="fa-brands fa-cc-visa"></i>
+
+                    </div>
+
+                    <div class="card-chip">
+
+                        <i class="fa-solid fa-microchip"></i>
+
+                    </div>
+
+                    <h2>**** **** **** 9125</h2>
+
+                    <div class="card-footer">
+
+                        <div>
+
+                            <small>Card Holder</small>
+
+                            <h4>John Doe</h4>
+
+                        </div>
+
+                        <div>
+
+                            <small>Expires</small>
+
+                            <h4>12/29</h4>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <section class="dashboard-grid">
+
+                <!-- Card Settings -->
+
+                <div class="glass-card">
+
+                    <h2>Card Controls</h2>
+
+                    <div class="settings-list">
+
+                        <div class="setting-item">
+
+                            <span>Freeze Card</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox">
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                        <div class="setting-item">
+
+                            <span>Online Transactions</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox" checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                        <div class="setting-item">
+
+                            <span>International Usage</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox">
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                        <div class="setting-item">
+
+                            <span>ATM Withdrawals</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox" checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Limits -->
+
+                <div class="glass-card">
+
+                    <h2>Card Limits</h2>
+
+                    <table class="details-table">
+
+                        <tr>
+
+                            <td>Daily Spending</td>
+
+                            <td>$5,000</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>ATM Withdrawal</td>
+
+                            <td>$1,000</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Online Purchase</td>
+
+                            <td>$3,500</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Contactless</td>
+
+                            <td>$250</td>
+
+                        </tr>
+
+                    </table>
+
+                    <br>
+
+                    <button class="btn btn-primary">
+
+                        Update Limits
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <section class="quick-actions glass-card">
+
+                <h2>Card Services</h2>
+
+                <div class="action-grid">
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <span>Block Card</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-key"></i>
+
+                        <span>Change PIN</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-copy"></i>
+
+                        <span>View CVV</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-file-arrow-down"></i>
+
+                        <span>Card Statement</span>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <section class="transactions-card glass-card">
+
+                <div class="section-header">
+
+                    <h2>Recent Card Transactions</h2>
+
+                    <a href="transactions.html">
+
+                        View All
+
+                    </a>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+
+                            <th>Merchant</th>
+
+                            <th>Card</th>
+
+                            <th>Status</th>
+
+                            <th>Amount</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>26 Jul 2026</td>
+
+                            <td>Amazon</td>
+
+                            <td>Debit Card</td>
+
+                            <td><span class="badge success">Completed</span></td>
+
+                            <td>-$189.99</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>25 Jul 2026</td>
+
+                            <td>Netflix</td>
+
+                            <td>Virtual Card</td>
+
+                            <td><span class="badge success">Completed</span></td>
+
+                            <td>-$15.99</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>23 Jul 2026</td>
+
+                            <td>Starbucks</td>
+
+                            <td>Debit Card</td>
+
+                            <td><span class="badge success">Completed</span></td>
+
+                            <td>-$12.40</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- JavaScript -->
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

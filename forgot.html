@@ -1,0 +1,89 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon | Forgot Password</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+
+    <main class="forgot-page">
+
+        <section class="forgot-container">
+
+            <div class="forgot-card glass-card">
+
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Aureon
+                </a>
+
+                <div class="forgot-icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <h1>Forgot Password?</h1>
+
+                <p>
+                    Don't worry. Enter your registered email address and we'll
+                    send you a One-Time Password (OTP) to securely reset your
+                    password.
+                </p>
+
+                <form id="forgotPasswordForm">
+
+                    <div class="input-group">
+
+                        <label for="email">
+                            Registered Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your registered email"
+                            required>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary full-width">
+
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Send OTP
+
+                    </button>
+
+                </form>
+
+                <div class="forgot-links">
+
+                    <a href="auth.html">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Back to Login
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>

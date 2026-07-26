@@ -1,0 +1,471 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon Admin | Customers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+
+        <aside class="sidebar admin-sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="../index.html" class="logo">
+
+                    <i class="fa-solid fa-building-columns"></i>
+
+                    Aureon Admin
+
+                </a>
+
+            </div>
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+                <a href="customers.html" class="active">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <span>Customers</span>
+
+                </a>
+
+                <a href="reports.html">
+
+                    <i class="fa-solid fa-file-chart-column"></i>
+
+                    <span>Reports</span>
+
+                </a>
+
+                <a href="../dashboard.html">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    <span>User Portal</span>
+
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <a href="login.html">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="dashboard-main">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h2>Customer Management</h2>
+
+                    <div class="breadcrumb">
+
+                        <span>Admin</span>
+
+                        <span>/</span>
+
+                        <span>Customers</span>
+
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Add Customer
+
+                </button>
+
+            </header>
+
+            <section class="glass-card">
+
+                <div class="filter-bar">
+
+                    <div class="search-box">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            placeholder="Search by customer name, email or account number...">
+
+                    </div>
+
+                    <select>
+
+                        <option>All Status</option>
+                        <option>Active</option>
+                        <option>Pending</option>
+                        <option>Suspended</option>
+
+                    </select>
+
+                    <select>
+
+                        <option>All Account Types</option>
+                        <option>Savings</option>
+                        <option>Current</option>
+                        <option>Premium</option>
+
+                    </select>
+
+                    <button class="btn btn-outline">
+
+                        <i class="fa-solid fa-filter"></i>
+
+                        Filter
+
+                    </button>
+
+                </div>
+
+            </section>
+
+            <section class="stats-grid">
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <h3>Total Customers</h3>
+
+                    <h2>12,548</h2>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-user-check"></i>
+
+                    <h3>Active</h3>
+
+                    <h2>12,102</h2>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-user-clock"></i>
+
+                    <h3>Pending KYC</h3>
+
+                    <h2>289</h2>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-user-lock"></i>
+
+                    <h3>Suspended</h3>
+
+                    <h2>157</h2>
+
+                </article>
+
+            </section>
+
+            <section class="transactions-card glass-card">
+
+                <div class="section-header">
+
+                    <h2>Customer Directory</h2>
+
+                    <button class="btn btn-outline">
+
+                        <i class="fa-solid fa-file-export"></i>
+
+                        Export
+
+                    </button>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Customer ID</th>
+                            <th>Name</th>
+                            <th>Account Type</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>AUR10254896</td>
+
+                            <td>John Doe</td>
+
+                            <td>Premium Savings</td>
+
+                            <td>john.doe@example.com</td>
+
+                            <td>
+
+                                <span class="badge success">
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button class="btn btn-outline">
+                                    View
+                                </button>
+
+                                <button class="btn btn-primary">
+                                    Edit
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>AUR10254897</td>
+
+                            <td>Sarah Williams</td>
+
+                            <td>Savings</td>
+
+                            <td>sarah@example.com</td>
+
+                            <td>
+
+                                <span class="badge success">
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button class="btn btn-outline">
+                                    View
+                                </button>
+
+                                <button class="btn btn-primary">
+                                    Edit
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>AUR10254898</td>
+
+                            <td>Michael Brown</td>
+
+                            <td>Current</td>
+
+                            <td>michael@example.com</td>
+
+                            <td>
+
+                                <span class="badge warning">
+
+                                    Pending
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button class="btn btn-outline">
+                                    View
+                                </button>
+
+                                <button class="btn btn-primary">
+                                    Approve
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>AUR10254899</td>
+
+                            <td>Emma Wilson</td>
+
+                            <td>Premium</td>
+
+                            <td>emma@example.com</td>
+
+                            <td>
+
+                                <span class="badge danger">
+
+                                    Suspended
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button class="btn btn-outline">
+                                    View
+                                </button>
+
+                                <button class="btn btn-primary">
+                                    Reactivate
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+            <section class="quick-actions glass-card">
+
+                <h2>Administrative Actions</h2>
+
+                <div class="action-grid">
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        <span>Create Customer</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-user-pen"></i>
+
+                        <span>Edit Profile</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                        <span>KYC Verification</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-ban"></i>
+
+                        <span>Block Account</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <span>Send Notification</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        <span>Delete Customer</span>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+            <section class="glass-card">
+
+                <div class="pagination">
+
+                    <button class="btn btn-outline">
+
+                        <i class="fa-solid fa-chevron-left"></i>
+
+                    </button>
+
+                    <button class="btn btn-primary">1</button>
+                    <button class="btn btn-outline">2</button>
+                    <button class="btn btn-outline">3</button>
+                    <button class="btn btn-outline">4</button>
+
+                    <button class="btn btn-outline">
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/admin.js"></script>
+
+</body>
+
+</html>

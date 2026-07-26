@@ -1,0 +1,345 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon | Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Aureon
+                </a>
+
+            </div>
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html" class="active">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="accounts.html">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Accounts</span>
+                </a>
+
+                <a href="transfer.html">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>Transfer</span>
+                </a>
+
+                <a href="transactions.html">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="beneficiaries.html">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Beneficiaries</span>
+                </a>
+
+                <a href="cards.html">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+
+                <a href="notifications.html">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+
+                <a href="profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+                <a href="help.html">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Help</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <a href="auth.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="dashboard-main">
+
+            <header class="topbar">
+
+                <button class="menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search...">
+
+                </div>
+
+                <div class="topbar-actions">
+
+                    <button class="icon-button">
+                        <a href="notifications.html"><i class="fa-solid fa-bell"></i></a>
+                    </button>
+
+                    <button class="icon-button">
+                        <a href="contact.html"><i class="fa-solid fa-envelope"></i></a>
+                    </button>
+
+                    <div class="profile-dropdown">
+
+                        <img
+                            src="assets/images/profile.png"
+                            alt="Profile Picture">
+
+                        <div>
+
+                            <h4>User</h4>
+
+                            <small>Premium User</small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <section class="welcome-banner glass-card">
+
+                <div>
+
+                    <h1>Welcome Back, User 👋</h1>
+
+                    <p>
+                        Here's an overview of your banking activities today.
+                    </p>
+
+                </div>
+
+                <button class="btn btn-primary">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Open New Account
+
+                </button>
+
+            </section>
+
+            <section class="stats-grid">
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                    <h3>Total Balance</h3>
+
+                    <h2>$24,580.75</h2>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+
+                    <h3>Income</h3>
+
+                    <h2>$8,920.00</h2>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-arrow-trend-down"></i>
+
+                    <h3>Expenses</h3>
+
+                    <h2>$3,245.90</h2>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-piggy-bank"></i>
+
+                    <h3>Savings</h3>
+
+                    <h2>$12,840.20</h2>
+
+                </article>
+
+            </section>
+
+            <section class="dashboard-grid">
+
+                <div class="quick-actions glass-card">
+
+                    <h2>Quick Actions</h2>
+
+                    <div class="action-grid">
+
+                        <a href="transfer.html">
+                            <i class="fa-solid fa-money-bill-transfer"></i>
+                            <span>Transfer</span>
+                        </a>
+
+                        <a href="bills.html">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                            <span>Pay Bills</span>
+                        </a>
+
+                        <a href="cards.html">
+                            <i class="fa-regular fa-credit-card"></i>
+                            <span>Cards</span>
+                        </a>
+
+                        <a href="beneficiaries.html">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Add Beneficiary</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="chart-card glass-card">
+
+                    <h2>Monthly Spending</h2>
+
+                    <div class="dummy-chart">
+
+                        <div class="bar" style="height:55%;"></div>
+                        <div class="bar" style="height:80%;"></div>
+                        <div class="bar" style="height:65%;"></div>
+                        <div class="bar" style="height:90%;"></div>
+                        <div class="bar" style="height:50%;"></div>
+                        <div class="bar" style="height:70%;"></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="transactions-card glass-card">
+
+                <div class="section-header">
+
+                    <h2>Recent Transactions</h2>
+
+                    <a href="transactions.html">
+                        View All
+                    </a>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>26 Jul</td>
+                            <td>Amazon Purchase</td>
+                            <td>Shopping</td>
+                            <td>Completed</td>
+                            <td>-$189.99</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>25 Jul</td>
+                            <td>Salary Credit</td>
+                            <td>Income</td>
+                            <td>Completed</td>
+                            <td>+$2,500.00</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>24 Jul</td>
+                            <td>Electricity Bill</td>
+                            <td>Utilities</td>
+                            <td>Completed</td>
+                            <td>-$86.50</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>23 Jul</td>
+                            <td>Netflix</td>
+                            <td>Subscription</td>
+                            <td>Completed</td>
+                            <td>-$15.99</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

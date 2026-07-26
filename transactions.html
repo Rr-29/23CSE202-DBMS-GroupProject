@@ -1,0 +1,331 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon | Transactions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Aureon
+                </a>
+
+            </div>
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="accounts.html">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Accounts</span>
+                </a>
+
+                <a href="transfer.html">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>Transfer</span>
+                </a>
+
+                <a href="transactions.html" class="active">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="beneficiaries.html">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Beneficiaries</span>
+                </a>
+
+                <a href="bills.html">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>Bills</span>
+                </a>
+
+                <a href="cards.html">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+
+                <a href="notifications.html">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+
+                <a href="profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <main class="dashboard-main">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h2>Transaction History</h2>
+
+                    <div class="breadcrumb">
+
+                        <a href="dashboard.html">Dashboard</a>
+
+                        <span>/</span>
+
+                        <span>Transactions</span>
+
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Download Statement
+
+                </button>
+
+            </header>
+
+            <section class="glass-card">
+
+                <div class="filter-bar">
+
+                    <div class="search-box">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            placeholder="Search transactions...">
+
+                    </div>
+
+                    <select>
+
+                        <option>All Types</option>
+                        <option>Credit</option>
+                        <option>Debit</option>
+
+                    </select>
+
+                    <select>
+
+                        <option>All Status</option>
+                        <option>Completed</option>
+                        <option>Pending</option>
+                        <option>Failed</option>
+
+                    </select>
+
+                    <input type="date">
+
+                    <button class="btn btn-outline">
+
+                        <i class="fa-solid fa-filter"></i>
+
+                        Apply
+
+                    </button>
+
+                </div>
+
+            </section>
+
+            <section class="transactions-card glass-card">
+
+                <div class="section-header">
+
+                    <h2>Recent Transactions</h2>
+
+                    <span>Showing 10 of 126 transactions</span>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Reference</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>26 Jul 2026</td>
+                            <td>TXN105421</td>
+                            <td>Salary Credit</td>
+                            <td>Credit</td>
+
+                            <td>
+                                <span class="badge success">
+                                    Completed
+                                </span>
+                            </td>
+
+                            <td>+$2,500.00</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>25 Jul 2026</td>
+                            <td>TXN105392</td>
+                            <td>Amazon Shopping</td>
+                            <td>Debit</td>
+
+                            <td>
+                                <span class="badge success">
+                                    Completed
+                                </span>
+                            </td>
+
+                            <td>-$189.99</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>24 Jul 2026</td>
+                            <td>TXN105350</td>
+                            <td>Electricity Bill</td>
+                            <td>Debit</td>
+
+                            <td>
+                                <span class="badge warning">
+                                    Pending
+                                </span>
+                            </td>
+
+                            <td>-$86.50</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>23 Jul 2026</td>
+                            <td>TXN105301</td>
+                            <td>Money Transfer</td>
+                            <td>Debit</td>
+
+                            <td>
+                                <span class="badge success">
+                                    Completed
+                                </span>
+                            </td>
+
+                            <td>-$500.00</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>22 Jul 2026</td>
+                            <td>TXN105250</td>
+                            <td>Netflix Subscription</td>
+                            <td>Debit</td>
+
+                            <td>
+                                <span class="badge danger">
+                                    Failed
+                                </span>
+                            </td>
+
+                            <td>-$15.99</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>21 Jul 2026</td>
+                            <td>TXN105198</td>
+                            <td>Cash Deposit</td>
+                            <td>Credit</td>
+
+                            <td>
+                                <span class="badge success">
+                                    Completed
+                                </span>
+                            </td>
+
+                            <td>+$750.00</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+            <section class="glass-card">
+
+                <div class="pagination">
+
+                    <button class="btn btn-outline">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <button class="btn btn-primary">1</button>
+
+                    <button class="btn btn-outline">2</button>
+
+                    <button class="btn btn-outline">3</button>
+
+                    <button class="btn btn-outline">4</button>
+
+                    <button class="btn btn-outline">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

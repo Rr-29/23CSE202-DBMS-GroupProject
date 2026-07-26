@@ -1,0 +1,395 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon Admin | Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+
+        <aside class="sidebar admin-sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="../index.html" class="logo">
+
+                    <i class="fa-solid fa-building-columns"></i>
+
+                    Aureon Admin
+
+                </a>
+
+            </div>
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html" class="active">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+                <a href="customers.html">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <span>Customers</span>
+
+                </a>
+
+                <a href="reports.html">
+
+                    <i class="fa-solid fa-file-chart-column"></i>
+
+                    <span>Reports</span>
+
+                </a>
+
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <a href="../auth.html">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="dashboard-main">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h2>Administrator Dashboard</h2>
+
+                    <div class="breadcrumb">
+
+                        <span>Admin</span>
+
+                        <span>/</span>
+
+                        <span>Dashboard</span>
+
+                    </div>
+
+                </div>
+
+                <div class="topbar-actions">
+
+                    <button class="icon-button">
+
+                        <i class="fa-solid fa-bell"></i>
+
+                    </button>
+
+                    <div class="profile-dropdown">
+
+                        <img
+                            src="../assets/images/profile.png"
+                            alt="Administrator">
+
+                        <div>
+
+                            <h4>Admin User</h4>
+
+                            <small>System Administrator</small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <section class="stats-grid">
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <h3>Total Customers</h3>
+
+                    <h2>12,548</h2>
+
+                    <small>+156 this month</small>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-building-columns"></i>
+
+                    <h3>Total Accounts</h3>
+
+                    <h2>18,932</h2>
+
+                    <small>Active accounts</small>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    <h3>Total Deposits</h3>
+
+                    <h2>$82.4M</h2>
+
+                    <small>Across all accounts</small>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-money-check-dollar"></i>
+
+                    <h3>Today's Transactions</h3>
+
+                    <h2>4,826</h2>
+
+                    <small>Processed successfully</small>
+
+                </article>
+
+            </section>
+
+            <section class="dashboard-grid">
+
+                <div class="glass-card">
+
+                    <h2>Monthly Revenue</h2>
+
+                    <div class="dummy-chart">
+
+                        <div class="bar" style="height:45%;"></div>
+                        <div class="bar" style="height:70%;"></div>
+                        <div class="bar" style="height:55%;"></div>
+                        <div class="bar" style="height:85%;"></div>
+                        <div class="bar" style="height:75%;"></div>
+                        <div class="bar" style="height:95%;"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="glass-card">
+
+                    <h2>Quick Actions</h2>
+
+                    <div class="action-grid">
+
+                        <a href="customers.html">
+
+                            <i class="fa-solid fa-user-plus"></i>
+
+                            <span>Add Customer</span>
+
+                        </a>
+
+                        <a href="customers.html">
+
+                            <i class="fa-solid fa-user-gear"></i>
+
+                            <span>Manage Users</span>
+
+                        </a>
+
+                        <a href="reports.html">
+
+                            <i class="fa-solid fa-file-arrow-down"></i>
+
+                            <span>Export Reports</span>
+
+                        </a>
+
+                        <a href="#">
+
+                            <i class="fa-solid fa-database"></i>
+
+                            <span>Backup Data</span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="transactions-card glass-card">
+
+                <div class="section-header">
+
+                    <h2>Recent Administrative Activity</h2>
+
+                    <button class="btn btn-outline">
+
+                        View Logs
+
+                    </button>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Time</th>
+                            <th>Administrator</th>
+                            <th>Action</th>
+                            <th>Module</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>09:42 AM</td>
+                            <td>Admin User</td>
+                            <td>Approved New Customer</td>
+                            <td>Customers</td>
+                            <td>
+                                <span class="badge success">
+                                    Success
+                                </span>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>09:18 AM</td>
+                            <td>Admin User</td>
+                            <td>Generated Monthly Report</td>
+                            <td>Reports</td>
+                            <td>
+                                <span class="badge success">
+                                    Completed
+                                </span>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>08:56 AM</td>
+                            <td>Admin User</td>
+                            <td>Updated Card Limits</td>
+                            <td>Cards</td>
+                            <td>
+                                <span class="badge warning">
+                                    Pending Review
+                                </span>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>08:21 AM</td>
+                            <td>System</td>
+                            <td>Daily Backup Completed</td>
+                            <td>Database</td>
+                            <td>
+                                <span class="badge success">
+                                    Successful
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+            <section class="stats-grid">
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-server"></i>
+
+                    <h3>Server Status</h3>
+
+                    <h2>99.98%</h2>
+
+                    <small>Uptime</small>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <h3>Security Alerts</h3>
+
+                    <h2>3</h2>
+
+                    <small>Require attention</small>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-database"></i>
+
+                    <h3>Database Health</h3>
+
+                    <h2>Healthy</h2>
+
+                    <small>Last backup: Today</small>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-network-wired"></i>
+
+                    <h3>API Status</h3>
+
+                    <h2>Online</h2>
+
+                    <small>All services operational</small>
+
+                </article>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/admin.js"></script>
+
+</body>
+
+</html>

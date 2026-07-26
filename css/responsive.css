@@ -1,0 +1,470 @@
+@media (min-width:1400px){
+
+    .container{
+        max-width:1320px;
+    }
+
+    .hero-grid{
+        gap:80px;
+    }
+
+    .dashboard-main{
+        padding:40px;
+    }
+
+    .stats-grid{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+}
+
+@media (max-width:1200px){
+
+    .container{
+        width:min(1100px,94%);
+    }
+
+    .hero-grid{
+        gap:40px;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .analytics-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .feature-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media (max-width:992px){
+
+    .dashboard-layout{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+    }
+
+    .dashboard-main{
+        padding:24px;
+    }
+
+    .nav-container{
+        flex-wrap:wrap;
+        gap:20px;
+        padding:15px 0;
+    }
+
+    .nav-links{
+        width:100%;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .nav-buttons{
+        width:100%;
+        justify-content:center;
+    }
+
+    .hero{
+        padding:70px 0;
+    }
+
+    .hero-grid{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero-content p{
+        margin-inline:auto;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .bank-card{
+        max-width:500px;
+        margin:0 auto;
+    }
+
+    .footer-content{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .topbar-actions{
+        width:100%;
+        justify-content:space-between;
+    }
+
+    .profile-header{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .card-actions{
+        justify-content:center;
+    }
+
+    .action-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media (max-width:992px){
+
+    h1{
+        font-size:2.5rem;
+    }
+
+    h2{
+        font-size:1.8rem;
+    }
+
+    h3{
+        font-size:1.15rem;
+    }
+
+    p{
+        font-size:.95rem;
+    }
+
+}
+
+@media (max-width:992px){
+
+    img{
+        max-width:100%;
+        height:auto;
+    }
+
+}
+
+@media (max-width:992px){
+
+    .transactions-card,
+    .admin-table{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:700px;
+    }
+
+}
+
+@media (max-width:992px){
+
+    .btn{
+        padding:13px 22px;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .container{
+        width:92%;
+    }
+
+    .nav-container{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .nav-links{
+        flex-direction:column;
+        gap:18px;
+        width:100%;
+    }
+
+    .nav-buttons{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .nav-buttons .btn{
+        width:100%;
+    }
+
+    .hero{
+        padding:60px 0;
+    }
+
+    .hero-content h1{
+        font-size:2.2rem;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .hero-buttons .btn{
+        width:100%;
+    }
+
+    .stats-grid,
+    .card-grid,
+    .feature-grid,
+    .dashboard-grid,
+    .action-grid,
+    .footer-content{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        width:100%;
+    }
+
+    .sidebar-menu{
+        flex-direction:column;
+    }
+
+    .sidebar-menu a{
+        width:100%;
+    }
+
+    .topbar{
+        gap:16px;
+    }
+
+    .topbar-actions{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .topbar-actions .btn{
+        width:100%;
+    }
+
+    .profile-dropdown{
+        width:100%;
+    }
+
+    .notification-card{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .beneficiary-header{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .card-actions{
+        flex-direction:column;
+    }
+
+    .card-actions .btn{
+        width:100%;
+    }
+
+}
+
+@media (max-width:576px){
+
+    body{
+        font-size:14px;
+    }
+
+    h1{
+        font-size:1.9rem;
+    }
+
+    h2{
+        font-size:1.5rem;
+    }
+
+    h3{
+        font-size:1.05rem;
+    }
+
+    section{
+        padding:50px 0;
+    }
+
+    .dashboard-main{
+        padding:16px;
+    }
+
+    .glass-card{
+        padding:18px;
+    }
+
+    .balance-card{
+        padding:22px;
+    }
+
+    .bank-card,
+    .bank-card-preview{
+        padding:20px;
+    }
+
+    .bank-card h2,
+    .bank-card-preview h2{
+        font-size:1.15rem;
+        letter-spacing:2px;
+    }
+
+    .profile-avatar img{
+        width:80px;
+        height:80px;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+    .search-box{
+        flex-direction:row;
+    }
+
+}
+
+@media (max-width:400px){
+
+    .hero-content h1{
+        font-size:1.7rem;
+    }
+
+    .logo{
+        font-size:1.2rem;
+    }
+
+    .otp-inputs{
+        gap:8px;
+    }
+
+    .otp-inputs input{
+        width:42px;
+        height:48px;
+        font-size:1rem;
+    }
+
+    .profile-dropdown{
+        flex-direction:column;
+        text-align:center;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .transactions-card,
+    .admin-table,
+    .activity-table{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:650px;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .input-group{
+        margin-bottom:16px;
+    }
+
+    .filter-bar{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .filter-bar input,
+    .filter-bar select,
+    .filter-bar .btn{
+        width:100%;
+    }
+
+}
+
+@media print{
+
+    body{
+        background:#fff;
+        color:#000;
+    }
+
+    .navbar,
+    .sidebar,
+    .footer,
+    .btn,
+    .topbar-actions,
+    .quick-actions,
+    .notification-list{
+        display:none !important;
+    }
+
+    .dashboard-main,
+    .container{
+        width:100%;
+        padding:0;
+        margin:0;
+    }
+
+    .glass-card{
+        box-shadow:none;
+        border:1px solid #ccc;
+        break-inside:avoid;
+    }
+
+    table{
+        min-width:100%;
+    }
+
+}
+
+.hide-mobile{
+    display:block;
+}
+
+.show-mobile{
+    display:none;
+}
+
+@media (max-width:768px){
+
+    .hide-mobile{
+        display:none !important;
+    }
+
+    .show-mobile{
+        display:block !important;
+    }
+
+    .text-center-mobile{
+        text-align:center;
+    }
+
+    .w-mobile-100{
+        width:100%;
+    }
+
+}

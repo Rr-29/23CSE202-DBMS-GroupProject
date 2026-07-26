@@ -1,0 +1,516 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon | Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Aureon
+                </a>
+
+            </div>
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="accounts.html">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Accounts</span>
+                </a>
+
+                <a href="transfer.html">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>Transfer</span>
+                </a>
+
+                <a href="transactions.html">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="beneficiaries.html">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Beneficiaries</span>
+                </a>
+
+                <a href="bills.html">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>Bills</span>
+                </a>
+
+                <a href="cards.html">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+
+                <a href="notifications.html">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+
+                <a href="profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+
+                <a href="settings.html" class="active">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <main class="dashboard-main">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h2>Settings</h2>
+
+                    <div class="breadcrumb">
+
+                        <a href="dashboard.html">Dashboard</a>
+
+                        <span>/</span>
+
+                        <span>Settings</span>
+
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Settings
+
+                </button>
+
+            </header>
+
+            <section class="dashboard-grid">
+
+                <div class="glass-card">
+
+                    <h2>
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Security
+                    </h2>
+
+                    <div class="settings-list">
+
+                        <div class="setting-item">
+
+                            <span>Two-Factor Authentication (2FA)</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox" checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                        <div class="setting-item">
+
+                            <span>Biometric Login</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox">
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                        <div class="setting-item">
+
+                            <span>Login Alerts</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox" checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                        <div class="setting-item">
+
+                            <span>Transaction Confirmation</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox" checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="glass-card">
+
+                    <h2>
+                        <i class="fa-solid fa-key"></i>
+                        Change Password
+                    </h2>
+
+                    <form>
+
+                        <div class="input-group">
+
+                            <label>Current Password</label>
+
+                            <input
+                                type="password"
+                                placeholder="Current password">
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>New Password</label>
+
+                            <input
+                                type="password"
+                                placeholder="New password">
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>Confirm Password</label>
+
+                            <input
+                                type="password"
+                                placeholder="Confirm new password">
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary">
+
+                            Update Password
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+            <section class="dashboard-grid">
+
+                <div class="glass-card">
+
+                    <h2>
+                        <i class="fa-solid fa-bell"></i>
+                        Notification Preferences
+                    </h2>
+
+                    <div class="settings-list">
+
+                        <div class="setting-item">
+
+                            <span>Email Notifications</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox" checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                        <div class="setting-item">
+
+                            <span>SMS Notifications</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox" checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                        <div class="setting-item">
+
+                            <span>Push Notifications</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox" checked>
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                        <div class="setting-item">
+
+                            <span>Marketing Messages</span>
+
+                            <label class="switch">
+
+                                <input type="checkbox">
+
+                                <span class="slider"></span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="glass-card">
+
+                    <h2>
+                        <i class="fa-solid fa-palette"></i>
+                        Appearance
+                    </h2>
+
+                    <form>
+
+                        <div class="input-group">
+
+                            <label>Dashboard Theme</label>
+
+                            <select>
+
+                                <option selected>Light</option>
+
+                                <option>Dark</option>
+
+                                <option>System Default</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>Language</label>
+
+                            <select>
+
+                                <option selected>English</option>
+
+                                <option>Spanish</option>
+
+                                <option>French</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>Time Zone</label>
+
+                            <select>
+
+                                <option selected>(UTC-05:00) Eastern Time</option>
+
+                                <option>(UTC+00:00) GMT</option>
+
+                                <option>(UTC+05:30) India Standard Time</option>
+
+                            </select>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+            <section class="glass-card">
+
+                <div class="section-header">
+
+                    <h2>Recent Login Activity</h2>
+
+                    <button class="btn btn-outline">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        Logout All Devices
+
+                    </button>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date & Time</th>
+
+                            <th>Device</th>
+
+                            <th>Location</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>26 Jul 2026, 09:42 AM</td>
+
+                            <td>Chrome on Windows</td>
+
+                            <td>New York, USA</td>
+
+                            <td>
+                                <span class="badge success">
+                                    Current Session
+                                </span>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>25 Jul 2026, 08:10 PM</td>
+
+                            <td>Android App</td>
+
+                            <td>New York, USA</td>
+
+                            <td>
+                                <span class="badge success">
+                                    Successful
+                                </span>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>24 Jul 2026, 11:18 AM</td>
+
+                            <td>Safari on iPhone</td>
+
+                            <td>Boston, USA</td>
+
+                            <td>
+                                <span class="badge warning">
+                                    Logged Out
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+            <section class="quick-actions glass-card">
+
+                <h2>Privacy & Account Management</h2>
+
+                <div class="action-grid">
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-file-arrow-down"></i>
+
+                        <span>Download My Data</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-user-lock"></i>
+
+                        <span>Privacy Settings</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-circle-xmark"></i>
+
+                        <span>Deactivate Account</span>
+
+                    </a>
+
+                    <a href="help.html">
+
+                        <i class="fa-solid fa-headset"></i>
+
+                        <span>Support Center</span>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

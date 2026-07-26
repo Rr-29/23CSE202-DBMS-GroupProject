@@ -1,0 +1,104 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon | OTP Verification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+    <main class="otp-page">
+
+        <section class="otp-container">
+
+            <div class="otp-card glass-card">
+
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Aureon
+                </a>
+
+                <div class="otp-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <h1>OTP Verification</h1>
+
+                <p>
+                    Enter the 6-digit verification code sent to your registered
+                    email address or mobile number.
+                </p>
+
+                <form id="otpForm">
+
+                    <div class="otp-input-group">
+
+                        <input type="text" maxlength="1" class="otp-input" required>
+                        <input type="text" maxlength="1" class="otp-input" required>
+                        <input type="text" maxlength="1" class="otp-input" required>
+                        <input type="text" maxlength="1" class="otp-input" required>
+                        <input type="text" maxlength="1" class="otp-input" required>
+                        <input type="text" maxlength="1" class="otp-input" required>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary full-width">
+
+                        <i class="fa-solid fa-circle-check"></i>
+                        Verify OTP
+
+                    </button>
+
+                </form>
+
+                <div class="otp-timer">
+
+                    <p>
+                        Didn't receive the code?
+                    </p>
+
+                    <button
+                        type="button"
+                        class="resend-btn"
+                        id="resendOtp">
+
+                        Resend OTP
+
+                    </button>
+
+                    <span id="countdown">
+                        Resend available in 00:30
+                    </span>
+
+                </div>
+
+                <div class="otp-links">
+
+                    <a href="forgot.html">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Back
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>

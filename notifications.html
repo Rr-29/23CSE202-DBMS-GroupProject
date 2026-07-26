@@ -1,0 +1,307 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon | Notifications</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Aureon
+                </a>
+
+            </div>
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="accounts.html">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Accounts</span>
+                </a>
+
+                <a href="transfer.html">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>Transfer</span>
+                </a>
+
+                <a href="transactions.html">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="beneficiaries.html">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Beneficiaries</span>
+                </a>
+
+                <a href="bills.html">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>Bills</span>
+                </a>
+
+                <a href="cards.html">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+
+                <a href="notifications.html" class="active">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+
+                <a href="profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <main class="dashboard-main">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h2>Notification Center</h2>
+
+                    <div class="breadcrumb">
+
+                        <a href="dashboard.html">Dashboard</a>
+
+                        <span>/</span>
+
+                        <span>Notifications</span>
+
+                    </div>
+
+                </div>
+
+                <div class="topbar-actions">
+
+                    <button class="btn btn-outline">
+
+                        <i class="fa-solid fa-check-double"></i>
+
+                        Mark All Read
+
+                    </button>
+
+                    <button class="btn btn-primary">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Clear All
+
+                    </button>
+
+                </div>
+
+            </header>
+
+            <section class="notification-list">
+
+                <article class="glass-card notification-card unread">
+
+                    <div class="notification-icon success">
+
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+
+                    </div>
+
+                    <div class="notification-content">
+
+                        <h3>Money Received</h3>
+
+                        <p>
+                            You received <strong>$2,500.00</strong> from
+                            <strong>ABC Technologies Ltd.</strong>
+                        </p>
+
+                        <small>Today • 09:45 AM</small>
+
+                    </div>
+
+                    <button class="btn btn-outline">
+                        Mark Read
+                    </button>
+
+                </article>
+
+                <article class="glass-card notification-card unread">
+
+                    <div class="notification-icon danger">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                    </div>
+
+                    <div class="notification-content">
+
+                        <h3>Security Alert</h3>
+
+                        <p>
+                            A login to your account was detected from a new
+                            device. If this wasn't you, secure your account
+                            immediately.
+                        </p>
+
+                        <small>Today • 07:30 AM</small>
+
+                    </div>
+
+                    <button class="btn btn-outline">
+                        Review
+                    </button>
+
+                </article>
+
+                <article class="glass-card notification-card">
+
+                    <div class="notification-icon warning">
+
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+
+                    </div>
+
+                    <div class="notification-content">
+
+                        <h3>Upcoming Bill</h3>
+
+                        <p>
+                            Your Electricity Bill of
+                            <strong>$86.50</strong>
+                            is due in 3 days.
+                        </p>
+
+                        <small>Yesterday • 05:20 PM</small>
+
+                    </div>
+
+                    <button class="btn btn-outline">
+                        Pay Now
+                    </button>
+
+                </article>
+
+                <article class="glass-card notification-card">
+
+                    <div class="notification-icon primary">
+
+                        <i class="fa-regular fa-credit-card"></i>
+
+                    </div>
+
+                    <div class="notification-content">
+
+                        <h3>Card Transaction</h3>
+
+                        <p>
+                            Your Debit Card was used at
+                            <strong>Amazon</strong> for
+                            <strong>$189.99</strong>.
+                        </p>
+
+                        <small>25 Jul 2026 • 08:15 PM</small>
+
+                    </div>
+
+                    <button class="btn btn-outline">
+                        Details
+                    </button>
+
+                </article>
+
+                <article class="glass-card notification-card">
+
+                    <div class="notification-icon accent">
+
+                        <i class="fa-solid fa-gift"></i>
+
+                    </div>
+
+                    <div class="notification-content">
+
+                        <h3>Exclusive Offer</h3>
+
+                        <p>
+                            Upgrade to an Aureon Premium Credit Card and enjoy
+                            cashback, airport lounge access and travel rewards.
+                        </p>
+
+                        <small>24 Jul 2026 • 11:00 AM</small>
+
+                    </div>
+
+                    <button class="btn btn-primary">
+                        Learn More
+                    </button>
+
+                </article>
+
+                <article class="glass-card notification-card">
+
+                    <div class="notification-icon success">
+
+                        <i class="fa-solid fa-key"></i>
+
+                    </div>
+
+                    <div class="notification-content">
+
+                        <h3>Password Updated</h3>
+
+                        <p>
+                            Your Aureon Internet Banking password was changed
+                            successfully.
+                        </p>
+
+                        <small>22 Jul 2026 • 02:40 PM</small>
+
+                    </div>
+
+                    <button class="btn btn-outline">
+                        View
+                    </button>
+
+                </article>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>

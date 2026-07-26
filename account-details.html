@@ -1,0 +1,365 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon | Account Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Aureon
+                </a>
+            </div>
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="accounts.html" class="active">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Accounts</span>
+                </a>
+
+                <a href="transfer.html">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>Transfer</span>
+                </a>
+
+                <a href="transactions.html">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="beneficiaries.html">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Beneficiaries</span>
+                </a>
+
+                <a href="cards.html">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <!-- ================= Main Content ================= -->
+
+        <main class="dashboard-main">
+
+            <header class="topbar">
+
+                <div>
+
+                    <h2>Account Details</h2>
+
+                    <div class="breadcrumb">
+
+                        <a href="dashboard.html">Dashboard</a>
+
+                        <span>/</span>
+
+                        <a href="accounts.html">Accounts</a>
+
+                        <span>/</span>
+
+                        <span>Savings Account</span>
+
+                    </div>
+
+                </div>
+
+                <div class="topbar-actions">
+
+                    <button class="icon-button">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+
+                    <div class="profile-dropdown">
+
+                        <img src="assets/images/profile.png"
+                            alt="Profile">
+
+                        <div>
+
+                            <h4>John Doe</h4>
+
+                            <small>Premium User</small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <section class="welcome-banner glass-card">
+
+                <div>
+
+                    <small>Savings Account</small>
+
+                    <h1>$18,520.75</h1>
+
+                    <p>Available Balance</p>
+
+                </div>
+
+                <button class="btn btn-primary">
+
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+
+                    Transfer Money
+
+                </button>
+
+            </section>
+
+
+            <section class="dashboard-grid">
+
+                <div class="glass-card">
+
+                    <h2>Account Information</h2>
+
+                    <table class="details-table">
+
+                        <tr>
+                            <td>Account Holder</td>
+                            <td>John Doe</td>
+                        </tr>
+
+                        <tr>
+                            <td>Account Number</td>
+                            <td>XXXX XXXX 4821</td>
+                        </tr>
+
+                        <tr>
+                            <td>Account Type</td>
+                            <td>Savings Account</td>
+                        </tr>
+
+                        <tr>
+                            <td>Branch</td>
+                            <td>Kochi Main Branch</td>
+                        </tr>
+
+                        <tr>
+                            <td>IFSC Code</td>
+                            <td>AURN0001025</td>
+                        </tr>
+
+                        <tr>
+                            <td>Currency</td>
+                            <td>USD</td>
+                        </tr>
+
+                        <tr>
+                            <td>Status</td>
+                            <td>
+                                <span class="badge success">
+                                    Active
+                                </span>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+
+                <div class="glass-card">
+
+                    <h2>Account Statistics</h2>
+
+                    <div class="stats-grid">
+
+                        <article class="stat-card">
+
+                            <i class="fa-solid fa-arrow-down"></i>
+
+                            <h3>Total Credits</h3>
+
+                            <h2>$42,150</h2>
+
+                        </article>
+
+                        <article class="stat-card">
+
+                            <i class="fa-solid fa-arrow-up"></i>
+
+                            <h3>Total Debits</h3>
+
+                            <h2>$23,629</h2>
+
+                        </article>
+
+                        <article class="stat-card">
+
+                            <i class="fa-solid fa-receipt"></i>
+
+                            <h3>Transactions</h3>
+
+                            <h2>158</h2>
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="transactions-card glass-card">
+
+                <div class="section-header">
+
+                    <h2>Recent Account Activity</h2>
+
+                    <a href="transactions.html">
+                        View All
+                    </a>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Reference</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>26 Jul</td>
+                            <td>Salary Credit</td>
+                            <td>TXN458923</td>
+                            <td>Completed</td>
+                            <td>+$2,500.00</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>25 Jul</td>
+                            <td>ATM Withdrawal</td>
+                            <td>TXN458712</td>
+                            <td>Completed</td>
+                            <td>-$200.00</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>24 Jul</td>
+                            <td>Amazon Purchase</td>
+                            <td>TXN458305</td>
+                            <td>Completed</td>
+                            <td>-$189.99</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>23 Jul</td>
+                            <td>Electricity Bill</td>
+                            <td>TXN457982</td>
+                            <td>Completed</td>
+                            <td>-$86.50</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+            <section class="quick-actions glass-card">
+
+                <h2>Account Services</h2>
+
+                <div class="action-grid">
+
+                    <a href="transfer.html">
+
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+
+                        <span>Transfer</span>
+
+                    </a>
+
+                    <a href="transactions.html">
+
+                        <i class="fa-solid fa-file-lines"></i>
+
+                        <span>Statement</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-download"></i>
+
+                        <span>Download PDF</span>
+
+                    </a>
+
+                    <a href="#">
+
+                        <i class="fa-solid fa-print"></i>
+
+                        <span>Print</span>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

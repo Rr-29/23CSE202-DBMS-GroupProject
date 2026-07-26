@@ -1,0 +1,365 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon | My Accounts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Aureon
+                </a>
+
+            </div>
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="accounts.html" class="active">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Accounts</span>
+                </a>
+
+                <a href="transfer.html">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>Transfer</span>
+                </a>
+
+                <a href="transactions.html">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="beneficiaries.html">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Beneficiaries</span>
+                </a>
+
+                <a href="bills.html">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>Bills</span>
+                </a>
+
+                <a href="cards.html">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+
+                <a href="notifications.html">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+
+                <a href="profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <main class="dashboard-main">
+
+            <!-- Top Bar -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <h2>My Accounts</h2>
+
+                    <div class="breadcrumb">
+
+                        <a href="dashboard.html">Dashboard</a>
+
+                        <span>/</span>
+
+                        <span>Accounts</span>
+
+                    </div>
+
+                </div>
+
+                <div class="topbar-actions">
+
+                    <button class="icon-button">
+                        <i class="fa-solid fa-bell"></i>
+                    </button>
+
+                    <div class="profile-dropdown">
+
+                        <img src="assets/images/profile.png"
+                            alt="Profile">
+
+                        <div>
+
+                            <h4>John Doe</h4>
+
+                            <small>Premium User</small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- ================= Account Summary ================= -->
+
+            <section class="stats-grid">
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-piggy-bank"></i>
+
+                    <h3>Savings Account</h3>
+
+                    <h2>$18,520.75</h2>
+
+                    <small>Available Balance</small>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-building-columns"></i>
+
+                    <h3>Current Account</h3>
+
+                    <h2>$4,760.25</h2>
+
+                    <small>Business Transactions</small>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-vault"></i>
+
+                    <h3>Fixed Deposit</h3>
+
+                    <h2>$30,000.00</h2>
+
+                    <small>Matures in 210 Days</small>
+
+                </article>
+
+            </section>
+
+            <!-- ================= Account Table ================= -->
+
+            <section class="transactions-card glass-card">
+
+                <div class="section-header">
+
+                    <h2>Account Details</h2>
+
+                    <button class="btn btn-primary">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        Open New Account
+
+                    </button>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Account Type</th>
+                            <th>Account Number</th>
+                            <th>Balance</th>
+                            <th>Status</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>Savings</td>
+
+                            <td>XXXX XXXX 4821</td>
+
+                            <td>$18,520.75</td>
+
+                            <td>
+
+                                <span class="badge success">
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <a href="account-details.html"
+                                    class="btn btn-outline">
+
+                                    View
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Current</td>
+
+                            <td>XXXX XXXX 9258</td>
+
+                            <td>$4,760.25</td>
+
+                            <td>
+
+                                <span class="badge success">
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <a href="account-details.html"
+                                    class="btn btn-outline">
+
+                                    View
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Fixed Deposit</td>
+
+                            <td>FD-78452196</td>
+
+                            <td>$30,000.00</td>
+
+                            <td>
+
+                                <span class="badge warning">
+
+                                    Locked
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <a href="account-details.html"
+                                    class="btn btn-outline">
+
+                                    View
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+            <section class="quick-actions glass-card">
+
+                <h2>Quick Account Services</h2>
+
+                <div class="action-grid">
+
+                    <a href="transfer.html">
+
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+
+                        <span>Transfer Money</span>
+
+                    </a>
+
+                    <a href="transactions.html">
+
+                        <i class="fa-solid fa-file-lines"></i>
+
+                        <span>Mini Statement</span>
+
+                    </a>
+
+                    <a href="cards.html">
+
+                        <i class="fa-regular fa-credit-card"></i>
+
+                        <span>Manage Cards</span>
+
+                    </a>
+
+                    <a href="help.html">
+
+                        <i class="fa-solid fa-headset"></i>
+
+                        <span>Customer Support</span>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,414 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon Admin | Reports</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+
+        <aside class="sidebar admin-sidebar">
+
+            <div class="sidebar-logo">
+
+                <a href="../index.html" class="logo">
+
+                    <i class="fa-solid fa-building-columns"></i>
+
+                    Aureon Admin
+
+                </a>
+
+            </div>
+
+            <nav class="sidebar-menu">
+
+                <a href="dashboard.html">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+                <a href="customers.html">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <span>Customers</span>
+
+                </a>
+
+                <a href="reports.html" class="active">
+
+                    <i class="fa-solid fa-file-chart-column"></i>
+
+                    <span>Reports</span>
+
+                </a>
+
+                <a href="../dashboard.html">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    <span>User Portal</span>
+
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <a href="login.html">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="dashboard-main">
+
+
+            <header class="topbar">
+
+                <div>
+
+                    <h2>Reports & Analytics</h2>
+
+                    <div class="breadcrumb">
+
+                        <span>Admin</span>
+
+                        <span>/</span>
+
+                        <span>Reports</span>
+
+                    </div>
+
+                </div>
+
+                <div class="topbar-actions">
+
+                    <button class="btn btn-outline">
+
+                        <i class="fa-solid fa-file-pdf"></i>
+
+                        Export PDF
+
+                    </button>
+
+                    <button class="btn btn-primary">
+
+                        <i class="fa-solid fa-file-excel"></i>
+
+                        Export Excel
+
+                    </button>
+
+                </div>
+
+            </header>
+
+            <section class="glass-card">
+
+                <div class="filter-bar">
+
+                    <input type="date">
+
+                    <input type="date">
+
+                    <select>
+
+                        <option>All Reports</option>
+                        <option>Transactions</option>
+                        <option>Customers</option>
+                        <option>Revenue</option>
+                        <option>Accounts</option>
+
+                    </select>
+
+                    <button class="btn btn-primary">
+
+                        <i class="fa-solid fa-filter"></i>
+
+                        Generate Report
+
+                    </button>
+
+                </div>
+
+            </section>
+
+            <section class="stats-grid">
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-sack-dollar"></i>
+
+                    <h3>Total Revenue</h3>
+
+                    <h2>$8.6M</h2>
+
+                    <small>+12.5% this month</small>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-money-check-dollar"></i>
+
+                    <h3>Transactions</h3>
+
+                    <h2>84,250</h2>
+
+                    <small>This month</small>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    <h3>New Customers</h3>
+
+                    <h2>524</h2>
+
+                    <small>Monthly registrations</small>
+
+                </article>
+
+                <article class="stat-card glass-card">
+
+                    <i class="fa-solid fa-building-columns"></i>
+
+                    <h3>New Accounts</h3>
+
+                    <h2>710</h2>
+
+                    <small>Opened this month</small>
+
+                </article>
+
+            </section>
+
+            <section class="dashboard-grid">
+
+                <div class="glass-card">
+
+                    <h2>Revenue Overview</h2>
+
+                    <div class="dummy-chart">
+
+                        <div class="bar" style="height:40%;"></div>
+                        <div class="bar" style="height:55%;"></div>
+                        <div class="bar" style="height:70%;"></div>
+                        <div class="bar" style="height:90%;"></div>
+                        <div class="bar" style="height:75%;"></div>
+                        <div class="bar" style="height:95%;"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="glass-card">
+
+                    <h2>Customer Growth</h2>
+
+                    <div class="dummy-chart">
+
+                        <div class="bar" style="height:25%;"></div>
+                        <div class="bar" style="height:45%;"></div>
+                        <div class="bar" style="height:60%;"></div>
+                        <div class="bar" style="height:80%;"></div>
+                        <div class="bar" style="height:85%;"></div>
+                        <div class="bar" style="height:100%;"></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="transactions-card glass-card">
+
+                <div class="section-header">
+
+                    <h2>Generated Reports</h2>
+
+                    <button class="btn btn-outline">
+
+                        <i class="fa-solid fa-arrows-rotate"></i>
+
+                        Refresh
+
+                    </button>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Report Name</th>
+                            <th>Generated By</th>
+                            <th>Date</th>
+                            <th>Format</th>
+                            <th>Status</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>Monthly Revenue Report</td>
+                            <td>Admin User</td>
+                            <td>26 Jul 2026</td>
+                            <td>PDF</td>
+
+                            <td>
+
+                                <span class="badge success">
+
+                                    Ready
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button class="btn btn-primary">
+
+                                    Download
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Customer Summary</td>
+                            <td>Admin User</td>
+                            <td>25 Jul 2026</td>
+                            <td>Excel</td>
+
+                            <td>
+
+                                <span class="badge success">
+
+                                    Ready
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button class="btn btn-primary">
+
+                                    Download
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Transaction Analysis</td>
+                            <td>System</td>
+                            <td>24 Jul 2026</td>
+                            <td>PDF</td>
+
+                            <td>
+
+                                <span class="badge warning">
+
+                                    Processing
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button class="btn btn-outline">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+            <section class="quick-actions glass-card">
+
+                <h2>Key Performance Indicators</h2>
+
+                <div class="action-grid">
+
+                    <div>
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <span>Revenue Growth: <strong>12.5%</strong></span>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <span>Transaction Success: <strong>99.8%</strong></span>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-user-group"></i>
+                        <span>Customer Satisfaction: <strong>96%</strong></span>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-server"></i>
+                        <span>System Uptime: <strong>99.98%</strong></span>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/admin.js"></script>
+
+</body>
+
+</html>
