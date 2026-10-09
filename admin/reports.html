@@ -68,15 +68,12 @@
             </nav>
 
             <div class="sidebar-footer">
-
-                <a href="login.html">
-
-                    <i class="fa-solid fa-right-from-bracket"></i>
-
-                    Logout
-
+                <a href="#" onclick="AureonAPI.showTeamModal(); return false;" style="color: #60A5FA; font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-users-gear"></i> Group D4 Team
                 </a>
-
+                <a href="../auth.html" onclick="AureonAPI.logout(true); return false;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
             </div>
 
         </aside>
@@ -406,6 +403,7 @@
 
     </div>
 
+    <script src="../js/api.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/admin.js"></script>
 

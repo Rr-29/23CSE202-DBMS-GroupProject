@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureon | Pay Bills</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-building-columns"></i>
+                    Aureon
+                </a>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="accounts.html">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Accounts</span>
+                </a>
+                <a href="transfer.html">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>Transfer</span>
+                </a>
+                <a href="transactions.html">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="beneficiaries.html">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Beneficiaries</span>
+                </a>
+                <a href="bills.html" class="active">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span>Bills</span>
+                </a>
+                <a href="cards.html">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+                <a href="notifications.html">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+                <a href="profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="settings.html">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" onclick="AureonAPI.showTeamModal(); return false;" style="color: #60A5FA; font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-users-gear"></i> Group D4 Team
+                </a>
+                <a href="auth.html" onclick="AureonAPI.logout(); return false;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard View -->
+        <main class="dashboard-main">
+            <header class="topbar">
+                <button class="menu-toggle" id="sidebarToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div>
+                    <h2>Bill Payments & Utilities</h2>
+                    <div class="breadcrumb">
+                        <a href="dashboard.html">Dashboard</a>
+                        <span>/</span>
+                        <span>Bills</span>
+                    </div>
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="icon-button" onclick="AureonAPI.showTeamModal()" title="View DBMS Group D4 Contributors">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </button>
+                    <button class="icon-button">
+                        <a href="notifications.html"><i class="fa-solid fa-bell"></i></a>
+                    </button>
+                    <div class="profile-dropdown">
+                        <img src="assets/images/profile.png" alt="Profile Picture">
+                        <div>
+                            <h4 id="topbarUserName">User</h4>
+                            <small>Premium User</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Bill Overview Stats -->
+            <section class="stats-grid">
+                <article class="stat-card glass-card">
+                    <i class="fa-solid fa-file-invoice" style="color: #EF4444;"></i>
+                    <h3>Due Bills</h3>
+                    <h2 id="unpaidTotal">$0.00</h2>
+                </article>
+
+                <article class="stat-card glass-card">
+                    <i class="fa-solid fa-calendar-check" style="color: #F59E0B;"></i>
+                    <h3>Upcoming Invoices</h3>
+                    <h2 id="unpaidCount">0</h2>
+                </article>
+
+                <article class="stat-card glass-card">
+                    <i class="fa-solid fa-circle-check" style="color: #10B981;"></i>
+                    <h3>Total Paid</h3>
+                    <h2 id="paidTotal">$0.00</h2>
+                </article>
+
+                <article class="stat-card glass-card">
+                    <i class="fa-solid fa-bolt" style="color: #2563EB;"></i>
+                    <h3>Active Providers</h3>
+                    <h2>5 Utility Networks</h2>
+                </article>
+            </section>
+
+            <!-- Due Bills Table -->
+            <section class="transactions-card glass-card" style="margin-bottom: 30px;">
+                <div class="section-header">
+                    <h2>Outstanding Bills</h2>
+                    <span style="font-size: 0.85rem; color: #6B7280;">Instant Settlement via Debit Account</span>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Biller</th>
+                            <th>Category</th>
+                            <th>Reference ID</th>
+                            <th>Due Date</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="unpaidBillsTable">
+                        <tr>
+                            <td colspan="6" style="text-align: center; padding: 20px;">Loading bill statements...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Paid Bills History -->
+            <section class="transactions-card glass-card">
+                <div class="section-header">
+                    <h2>Payment History</h2>
+                    <span style="font-size: 0.85rem; color: #6B7280;">Archived Invoices & Receipts</span>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Biller</th>
+                            <th>Category</th>
+                            <th>Reference</th>
+                            <th>Settlement Date</th>
+                            <th>Debited Account</th>
+                            <th>Amount Paid</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="paidBillsTable">
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 20px;">No previous bill history yet.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <!-- Bill Payment Modal -->
+    <div class="modal" id="payBillModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color: #1E3A8A;">Confirm Bill Payment</h3>
+                <button class="modal-close" onclick="closePayModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="payBillForm">
+                <input type="hidden" id="modalBillId">
+                <div style="background: #F1F5F9; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #64748B;">Biller:</span>
+                        <strong id="modalBillerName" style="color: #0F172A;">-</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #64748B;">Reference No:</span>
+                        <span id="modalBillRef">-</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #64748B;">Amount Due:</span>
+                        <strong id="modalBillAmount" style="color: #EF4444; font-size: 1.1rem;">$0.00</strong>
+                    </div>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 20px;">
+                    <label for="payAccountSelect" style="display: block; font-weight: 500; margin-bottom: 8px;">Pay From Account</label>
+                    <select id="payAccountSelect" style="width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px;" required>
+                        <option value="">Select source account</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">
+                    <i class="fa-solid fa-lock"></i> Authorize & Pay
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        let currentAccounts = [];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadUserHeader();
+            loadBills();
+            loadAccountsForPayment();
+
+            const payForm = document.getElementById("payBillForm");
+            if (payForm) {
+                payForm.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const billId = document.getElementById("modalBillId").value;
+                    const accountNo = document.getElementById("payAccountSelect").value;
+                    if (!accountNo) {
+                        AureonAPI.showToast("Please select a valid account to pay from.", "warning");
+                        return;
+                    }
+
+                    const res = await AureonAPI.request(`/api/bills/${billId}/pay`, {
+                        method: "POST",
+                        body: JSON.stringify({ account_no: accountNo })
+                    });
+
+                    if (res.success) {
+                        AureonAPI.showToast(res.message, "success");
+                        closePayModal();
+                        loadBills();
+                    } else {
+                        AureonAPI.showToast(res.message, "error");
+                    }
+                });
+            }
+        });
+
+        function loadUserHeader() {
+            const user = AureonAPI.getUser();
+            const topbarUser = document.getElementById("topbarUserName");
+            if (topbarUser && user) {
+                topbarUser.textContent = user.name || "Customer";
+            }
+        }
+
+        async function loadAccountsForPayment() {
+            const res = await AureonAPI.request("/api/accounts");
+            if (res.success && res.accounts) {
+                currentAccounts = res.accounts;
+                const select = document.getElementById("payAccountSelect");
+                select.innerHTML = '<option value="">Select source account</option>';
+                res.accounts.forEach(acc => {
+                    select.innerHTML += `<option value="${acc.account_no}">${acc.account_type} (${acc.account_no.slice(-4)}) - ${AureonAPI.formatCurrency(acc.balance)}</option>`;
+                });
+            }
+        }
+
+        async function loadBills() {
+            const res = await AureonAPI.request("/api/bills");
+            if (!res.success) return;
+
+            // Stats
+            document.getElementById("unpaidTotal").textContent = AureonAPI.formatCurrency(res.summary.unpaid_total);
+            document.getElementById("unpaidCount").textContent = res.summary.unpaid_count;
+            document.getElementById("paidTotal").textContent = AureonAPI.formatCurrency(res.summary.paid_total);
+
+            // Unpaid table
+            const unpaidTable = document.getElementById("unpaidBillsTable");
+            const unpaid = res.bills.filter(b => b.status === "Unpaid");
+            if (unpaid.length === 0) {
+                unpaidTable.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #10B981; padding: 25px;"><i class="fa-solid fa-circle-check"></i> Great job! You have no outstanding bills.</td></tr>`;
+            } else {
+                unpaidTable.innerHTML = unpaid.map(b => `
+                    <tr>
+                        <td><strong>${b.biller_name}</strong></td>
+                        <td><span class="badge info">${b.biller_type}</span></td>
+                        <td><code>${b.reference_no}</code></td>
+                        <td>${AureonAPI.formatDate(b.due_date)}</td>
+                        <td style="color: #EF4444; font-weight: 600;">${AureonAPI.formatCurrency(b.amount)}</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="openPayModal(${b.bill_id}, '${b.biller_name}', '${b.reference_no}', ${b.amount})" style="padding: 6px 14px; font-size: 0.85rem;">
+                                <i class="fa-solid fa-credit-card"></i> Pay Now
+                            </button>
+                        </td>
+                    </tr>
+                `).join("");
+            }
+
+            // Paid table
+            const paidTable = document.getElementById("paidBillsTable");
+            const paid = res.bills.filter(b => b.status === "Paid");
+            if (paid.length === 0) {
+                paidTable.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 20px; color: #9CA3AF;">No settled bills yet.</td></tr>`;
+            } else {
+                paidTable.innerHTML = paid.map(b => `
+                    <tr>
+                        <td><strong>${b.biller_name}</strong></td>
+                        <td><span class="badge info">${b.biller_type}</span></td>
+                        <td><code>${b.reference_no}</code></td>
+                        <td>${b.paid_at ? AureonAPI.formatDate(b.paid_at) : 'Completed'}</td>
+                        <td>${b.account_no ? '•••' + b.account_no.slice(-4) : 'Direct'}</td>
+                        <td style="font-weight: 600;">${AureonAPI.formatCurrency(b.amount)}</td>
+                        <td><span class="badge success">Paid</span></td>
+                    </tr>
+                `).join("");
+            }
+        }
+
+        function openPayModal(id, biller, ref, amount) {
+            document.getElementById("modalBillId").value = id;
+            document.getElementById("modalBillerName").textContent = biller;
+            document.getElementById("modalBillRef").textContent = ref;
+            document.getElementById("modalBillAmount").textContent = AureonAPI.formatCurrency(amount);
+            document.getElementById("payBillModal").classList.add("active");
+        }
+
+        function closePayModal() {
+            document.getElementById("payBillModal").classList.remove("active");
+        }
+    </script>
+</body>
+</html>
