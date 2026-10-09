@@ -1,334 +1,376 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aureon | Transactions</title>
+    <title>Aureon | Manage Beneficiaries</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 
 <body>
-
     <div class="dashboard-layout">
-
+        <!-- Sidebar Navigation -->
         <aside class="sidebar">
-
             <div class="sidebar-logo">
-
                 <a href="index.html" class="logo">
                     <i class="fa-solid fa-building-columns"></i>
                     Aureon
                 </a>
-
             </div>
 
             <nav class="sidebar-menu">
-
                 <a href="dashboard.html">
                     <i class="fa-solid fa-house"></i>
                     <span>Dashboard</span>
                 </a>
-
                 <a href="accounts.html">
                     <i class="fa-solid fa-wallet"></i>
                     <span>Accounts</span>
                 </a>
-
                 <a href="transfer.html">
                     <i class="fa-solid fa-money-bill-transfer"></i>
                     <span>Transfer</span>
                 </a>
-
-                <a href="transactions.html" class="active">
+                <a href="transactions.html">
                     <i class="fa-solid fa-clock-rotate-left"></i>
                     <span>Transactions</span>
                 </a>
-
-                <a href="beneficiaries.html">
+                <a href="beneficiaries.html" class="active">
                     <i class="fa-solid fa-users"></i>
                     <span>Beneficiaries</span>
                 </a>
-
                 <a href="bills.html">
                     <i class="fa-solid fa-file-invoice-dollar"></i>
                     <span>Bills</span>
                 </a>
-
                 <a href="cards.html">
                     <i class="fa-regular fa-credit-card"></i>
                     <span>Cards</span>
                 </a>
-
                 <a href="notifications.html">
                     <i class="fa-solid fa-bell"></i>
                     <span>Notifications</span>
                 </a>
-
                 <a href="profile.html">
                     <i class="fa-solid fa-user"></i>
                     <span>Profile</span>
                 </a>
-
                 <a href="settings.html">
                     <i class="fa-solid fa-gear"></i>
                     <span>Settings</span>
                 </a>
-
             </nav>
 
+            <div class="sidebar-footer">
+                <a href="#" onclick="AureonAPI.showTeamModal(); return false;" style="color: #60A5FA; font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-users-gear"></i> Group D4 Team
+                </a>
+                <a href="auth.html" onclick="AureonAPI.logout(); return false;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            </div>
         </aside>
 
+        <!-- Main Content -->
         <main class="dashboard-main">
-
-
             <header class="topbar">
-
-                <div>
-
-                    <h2>Transaction History</h2>
-
-                    <div class="breadcrumb">
-
-                        <a href="dashboard.html">Dashboard</a>
-
-                        <span>/</span>
-
-                        <span>Transactions</span>
-
-                    </div>
-
-                </div>
-
-                <button class="btn btn-primary">
-
-                    <i class="fa-solid fa-download"></i>
-
-                    Download Statement
-
+                <button class="menu-toggle" id="sidebarToggle">
+                    <i class="fa-solid fa-bars"></i>
                 </button>
 
-            </header>
-
-            <section class="glass-card">
-
-                <div class="filter-bar">
-
-                    <div class="search-box">
-
-                        <i class="fa-solid fa-magnifying-glass"></i>
-
-                        <input
-                            type="text"
-                            placeholder="Search transactions...">
-
+                <div>
+                    <h2>Beneficiaries & Payees</h2>
+                    <div class="breadcrumb">
+                        <a href="dashboard.html">Dashboard</a>
+                        <span>/</span>
+                        <span>Beneficiaries</span>
                     </div>
-
-                    <select>
-
-                        <option>All Types</option>
-                        <option>Credit</option>
-                        <option>Debit</option>
-
-                    </select>
-
-                    <select>
-
-                        <option>All Status</option>
-                        <option>Completed</option>
-                        <option>Pending</option>
-                        <option>Failed</option>
-
-                    </select>
-
-                    <input type="date">
-
-                    <button class="btn btn-outline">
-
-                        <i class="fa-solid fa-filter"></i>
-
-                        Apply
-
-                    </button>
-
                 </div>
 
+                <div class="topbar-actions">
+                    <button class="btn btn-primary" onclick="openAddModal()">
+                        <i class="fa-solid fa-user-plus"></i> Add Beneficiary
+                    </button>
+                    <button class="icon-button" onclick="AureonAPI.showTeamModal()" title="View DBMS Contributors">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </button>
+                    <div class="profile-dropdown">
+                        <img src="assets/images/profile.png" alt="Profile">
+                        <div>
+                            <h4 id="topbarUserName">User</h4>
+                            <small>Premium User</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Quick Stats -->
+            <section class="stats-grid">
+                <article class="stat-card glass-card">
+                    <i class="fa-solid fa-users" style="color: #2563EB;"></i>
+                    <h3>Saved Payees</h3>
+                    <h2 id="totalBenCount">0</h2>
+                </article>
+
+                <article class="stat-card glass-card">
+                    <i class="fa-solid fa-building-columns" style="color: #10B981;"></i>
+                    <h3>Internal Aureon</h3>
+                    <h2 id="internalBenCount">0</h2>
+                </article>
+
+                <article class="stat-card glass-card">
+                    <i class="fa-solid fa-globe" style="color: #F59E0B;"></i>
+                    <h3>Other Banks</h3>
+                    <h2 id="externalBenCount">0</h2>
+                </article>
+
+                <article class="stat-card glass-card">
+                    <i class="fa-solid fa-shield-halved" style="color: #8B5CF6;"></i>
+                    <h3>Verification</h3>
+                    <h2>100% KYC Approved</h2>
+                </article>
             </section>
 
+            <!-- Filter and Search -->
+            <section class="glass-card" style="margin-bottom: 25px; padding: 15px 25px;">
+                <div class="filter-bar" style="display: flex; gap: 15px; align-items: center; justify-content: space-between;">
+                    <div class="search-box" style="flex: 1; max-width: 400px;">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="benSearch" placeholder="Search by recipient name, bank, or account...">
+                    </div>
+                    <span style="font-size: 0.85rem; color: #6B7280;">Instant lookup across registered accounts</span>
+                </div>
+            </section>
+
+            <!-- Beneficiaries Roster -->
             <section class="transactions-card glass-card">
-
                 <div class="section-header">
-
-                    <h2>Recent Transactions</h2>
-
-                    <span>Showing 10 of 126 transactions</span>
-
+                    <h2>Registered Beneficiaries</h2>
+                    <span id="showingCountText" style="font-size: 0.85rem; color: #6B7280;">Loading recipients...</span>
                 </div>
 
                 <table>
-
                     <thead>
-
                         <tr>
-
-                            <th>Date</th>
-                            <th>Reference</th>
-                            <th>Description</th>
-                            <th>Type</th>
+                            <th>Recipient Name</th>
+                            <th>Bank Name</th>
+                            <th>Account Number</th>
+                            <th>IFSC / Route Code</th>
+                            <th>Transfer Mode</th>
                             <th>Status</th>
-                            <th>Amount</th>
-
+                            <th>Actions</th>
                         </tr>
-
                     </thead>
-
-                    <tbody>
-
+                    <tbody id="beneficiariesTable">
                         <tr>
-
-                            <td>26 Jul 2026</td>
-                            <td>TXN105421</td>
-                            <td>Salary Credit</td>
-                            <td>Credit</td>
-
-                            <td>
-                                <span class="badge success">
-                                    Completed
-                                </span>
-                            </td>
-
-                            <td>+$2,500.00</td>
-
+                            <td colspan="7" style="text-align: center; padding: 25px;">Loading saved beneficiaries...</td>
                         </tr>
-
-                        <tr>
-
-                            <td>25 Jul 2026</td>
-                            <td>TXN105392</td>
-                            <td>Amazon Shopping</td>
-                            <td>Debit</td>
-
-                            <td>
-                                <span class="badge success">
-                                    Completed
-                                </span>
-                            </td>
-
-                            <td>-$189.99</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>24 Jul 2026</td>
-                            <td>TXN105350</td>
-                            <td>Electricity Bill</td>
-                            <td>Debit</td>
-
-                            <td>
-                                <span class="badge warning">
-                                    Pending
-                                </span>
-                            </td>
-
-                            <td>-$86.50</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>23 Jul 2026</td>
-                            <td>TXN105301</td>
-                            <td>Money Transfer</td>
-                            <td>Debit</td>
-
-                            <td>
-                                <span class="badge success">
-                                    Completed
-                                </span>
-                            </td>
-
-                            <td>-$500.00</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>22 Jul 2026</td>
-                            <td>TXN105250</td>
-                            <td>Netflix Subscription</td>
-                            <td>Debit</td>
-
-                            <td>
-                                <span class="badge danger">
-                                    Failed
-                                </span>
-                            </td>
-
-                            <td>-$15.99</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>21 Jul 2026</td>
-                            <td>TXN105198</td>
-                            <td>Cash Deposit</td>
-                            <td>Credit</td>
-
-                            <td>
-                                <span class="badge success">
-                                    Completed
-                                </span>
-                            </td>
-
-                            <td>+$750.00</td>
-
-                        </tr>
-
                     </tbody>
-
                 </table>
-
             </section>
-
-
-            <section class="glass-card">
-
-                <div class="pagination">
-
-                    <button class="btn btn-outline">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-
-                    <button class="btn btn-primary">1</button>
-
-                    <button class="btn btn-outline">2</button>
-
-                    <button class="btn btn-outline">3</button>
-
-                    <button class="btn btn-outline">4</button>
-
-                    <button class="btn btn-outline">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-
-                </div>
-
-            </section>
-
         </main>
-
     </div>
 
+    <!-- Add Beneficiary Modal -->
+    <div class="modal" id="addBenModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color: #1E3A8A;">Add New Beneficiary</h3>
+                <button class="modal-close" onclick="closeAddModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="addBenForm">
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label for="benName" style="display: block; font-weight: 500; margin-bottom: 6px;">Beneficiary Full Name</label>
+                    <input type="text" id="benName" placeholder="e.g. Sarah Williams" required style="width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px;">
+                </div>
+
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label for="benAccount" style="display: block; font-weight: 500; margin-bottom: 6px;">Account Number</label>
+                    <input type="text" id="benAccount" placeholder="e.g. AUR100234822" required style="width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px;">
+                </div>
+
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label for="benBank" style="display: block; font-weight: 500; margin-bottom: 6px;">Bank Name</label>
+                    <select id="benBank" style="width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px;" required>
+                        <option value="Aureon Bank">Aureon Bank (Internal Transfer)</option>
+                        <option value="State Bank of India">State Bank of India</option>
+                        <option value="HDFC Bank">HDFC Bank</option>
+                        <option value="ICICI Bank">ICICI Bank</option>
+                        <option value="JPMorgan Chase">JPMorgan Chase</option>
+                        <option value="Bank of America">Bank of America</option>
+                    </select>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label for="benIfsc" style="display: block; font-weight: 500; margin-bottom: 6px;">IFSC / Routing Code</label>
+                    <input type="text" id="benIfsc" value="AURN0001001" placeholder="e.g. AURN0001001" required style="width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px;">
+                </div>
+
+                <div class="input-group" style="margin-bottom: 20px;">
+                    <label for="benType" style="display: block; font-weight: 500; margin-bottom: 6px;">Transfer Type</label>
+                    <select id="benType" style="width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px;">
+                        <option value="Internal">Internal (Instant Free)</option>
+                        <option value="IMPS">IMPS (Immediate Payment)</option>
+                        <option value="NEFT">NEFT (National Electronic Transfer)</option>
+                        <option value="RTGS">RTGS (High Value Settlement)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">
+                    <i class="fa-solid fa-plus"></i> Save Beneficiary
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script>
+        let allBeneficiaries = [];
 
+        document.addEventListener("DOMContentLoaded", () => {
+            loadUserHeader();
+            loadBeneficiaries();
+
+            // Search filter
+            const searchInput = document.getElementById("benSearch");
+            if (searchInput) {
+                searchInput.addEventListener("input", () => {
+                    const term = searchInput.value.toLowerCase().trim();
+                    const filtered = allBeneficiaries.filter(b => 
+                        b.name.toLowerCase().includes(term) ||
+                        b.bank_name.toLowerCase().includes(term) ||
+                        b.account_no.toLowerCase().includes(term)
+                    );
+                    renderBeneficiaries(filtered);
+                });
+            }
+
+            // Bank change auto IFSC
+            const bankSelect = document.getElementById("benBank");
+            const ifscInput = document.getElementById("benIfsc");
+            if (bankSelect && ifscInput) {
+                bankSelect.addEventListener("change", () => {
+                    if (bankSelect.value === "Aureon Bank") ifscInput.value = "AURN0001001";
+                    else if (bankSelect.value === "State Bank of India") ifscInput.value = "SBIN0004521";
+                    else if (bankSelect.value === "HDFC Bank") ifscInput.value = "HDFC0001928";
+                    else if (bankSelect.value === "ICICI Bank") ifscInput.value = "ICIC0008472";
+                    else if (bankSelect.value === "JPMorgan Chase") ifscInput.value = "CHASUS33";
+                    else if (bankSelect.value === "Bank of America") ifscInput.value = "BOFAUS3N";
+                });
+            }
+
+            // Form Submit
+            const form = document.getElementById("addBenForm");
+            if (form) {
+                form.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById("benName").value;
+                    const account_no = document.getElementById("benAccount").value;
+                    const bank_name = document.getElementById("benBank").value;
+                    const ifsc_code = document.getElementById("benIfsc").value;
+                    const transfer_type = document.getElementById("benType").value;
+
+                    const res = await AureonAPI.request("/api/beneficiaries/add", {
+                        method: "POST",
+                        body: JSON.stringify({ name, account_no, bank_name, ifsc_code, transfer_type })
+                    });
+
+                    if (res.success) {
+                        AureonAPI.showToast(res.message, "success");
+                        closeAddModal();
+                        form.reset();
+                        loadBeneficiaries();
+                    } else {
+                        AureonAPI.showToast(res.message, "error");
+                    }
+                });
+            }
+        });
+
+        function loadUserHeader() {
+            const user = AureonAPI.getUser();
+            const topbarUser = document.getElementById("topbarUserName");
+            if (topbarUser && user) {
+                topbarUser.textContent = user.name || "Customer";
+            }
+        }
+
+        async function loadBeneficiaries() {
+            const res = await AureonAPI.request("/api/beneficiaries");
+            if (res.success && res.beneficiaries) {
+                allBeneficiaries = res.beneficiaries;
+                document.getElementById("totalBenCount").textContent = allBeneficiaries.length;
+                document.getElementById("internalBenCount").textContent = allBeneficiaries.filter(b => b.transfer_type === "Internal" || b.bank_name.includes("Aureon")).length;
+                document.getElementById("externalBenCount").textContent = allBeneficiaries.filter(b => b.transfer_type !== "Internal" && !b.bank_name.includes("Aureon")).length;
+                renderBeneficiaries(allBeneficiaries);
+            }
+        }
+
+        function renderBeneficiaries(list) {
+            const tbody = document.getElementById("beneficiariesTable");
+            document.getElementById("showingCountText").textContent = `Showing ${list.length} registered payees`;
+
+            if (list.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 25px; color: #9CA3AF;">No beneficiaries found. Click "+ Add Beneficiary" to register one.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = list.map(b => `
+                <tr>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 32px; height: 32px; border-radius: 50%; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; font-weight: 600;">
+                                ${b.name.charAt(0)}
+                            </div>
+                            <strong>${b.name}</strong>
+                        </div>
+                    </td>
+                    <td>${b.bank_name}</td>
+                    <td><code>${b.account_no}</code></td>
+                    <td>${b.ifsc_code}</td>
+                    <td><span class="badge info">${b.transfer_type}</span></td>
+                    <td><span class="badge success">Active</span></td>
+                    <td>
+                        <div style="display: flex; gap: 8px;">
+                            <a href="transfer.html?beneficiary=${b.beneficiary_id}" class="btn btn-outline btn-sm" style="padding: 5px 10px; font-size: 0.8rem;" title="Send Money">
+                                <i class="fa-solid fa-paper-plane"></i> Send
+                            </a>
+                            <button class="btn btn-outline btn-sm" onclick="deleteBeneficiary(${b.beneficiary_id}, '${b.name}')" style="padding: 5px 10px; font-size: 0.8rem; color: #EF4444;" title="Remove">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join("");
+        }
+
+        async function deleteBeneficiary(id, name) {
+            if (!confirm(`Are you sure you want to remove beneficiary "${name}"?`)) return;
+            const res = await AureonAPI.request(`/api/beneficiaries/${id}`, { method: "DELETE" });
+            if (res.success) {
+                AureonAPI.showToast(res.message, "success");
+                loadBeneficiaries();
+            } else {
+                AureonAPI.showToast(res.message, "error");
+            }
+        }
+
+        function openAddModal() {
+            document.getElementById("addBenModal").classList.add("active");
+        }
+
+        function closeAddModal() {
+            document.getElementById("addBenModal").classList.remove("active");
+        }
+    </script>
 </body>
-
 </html>
