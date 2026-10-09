@@ -5,17 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initializeDashboard() {
-
     initializeSidebarToggle();
-
     initializeProfileDropdown();
-
     initializeBalanceToggle();
-
     initializeQuickActions();
-
     animateDashboardCards();
-
+    loadDashboardData();
 }
 
 function initializeSidebarToggle() {
@@ -635,8 +630,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
     highlightCurrentMenu();
 
-    console.log(
-        "Dashboard initialized successfully."
-    );
-
+    console.log("Dashboard initialized successfully.");
 });
+
+async function loadDashboardData() {
+    if (typeof AureonAPI === "undefined") return;
+
+    // 1. User Header & Welcome
+    const user = AureonAPI.getUser();
+    const welcomeH1 = document.querySelector(".welcome-banner h1");
+    if (welcomeH1 && user) {
+        welcomeH1.innerHTML = `Welcome Back, ${user.name} 👋`;
+    }
+    const profileName = document.querySelector(".profile-dropdown h4");
+    if (profileName && user) {
+        profileName.textContent = user.name;
+    }
+
+    // 2. Fetch Accounts & Balances
+    const accRes = await AureonAPI.request("/api/accounts");
+    if (accRes.success && accRes.summary) {
+        const stats = document.querySelectorAll(".stats-grid .stat-card h2");
+        if (stats.length >= 4) {
+            stats[0].textContent = AureonAPI.formatCurrency(accRes.summary.total_balance);
+            stats[1].textContent = AureonAPI.formatCurrency(accRes.summary.total_income);
+            stats[2].textContent = AureonAPI.formatCurrency(accRes.summary.total_expenses);
+            stats[3].textContent = AureonAPI.formatCurrency(accRes.summary.total_savings);
+        }
+    }
+
+    // 3. Fetch Recent Transactions
+    const txnRes = await AureonAPI.request("/api/transactions?limit=4");
+    const txnTable = document.querySelector(".transactions-card table tbody");
+    if (txnRes.success && txnRes.transactions && txnTable) {
+        if (txnRes.transactions.length > 0) {
+            txnTable.innerHTML = txnRes.transactions.map(t => {
+                const isCredit = t.transaction_type === "Credit";
+                const color = isCredit ? "#10B981" : "#EF4444";
+                const sign = isCredit ? "+" : "-";
+                return `
+                    <tr>
+                        <td>${AureonAPI.formatDate(t.transaction_time)}</td>
+                        <td><strong>${t.description}</strong></td>
+                        <td><span class="badge info">${t.category || t.transaction_type}</span></td>
+                        <td><span class="badge success">${t.status}</span></td>
+                        <td style="color: ${color}; font-weight: 600;">${sign}${AureonAPI.formatCurrency(t.amount)}</td>
+                    </tr>
+                `;
+            }).join("");
+        }
+    }
+
+    // 4. Open New Account Button
+    const newAccBtn = document.querySelector(".welcome-banner button");
+    if (newAccBtn) {
+        newAccBtn.addEventListener("click", () => {
+            window.location.href = "accounts.html";
+        });
+    }
+}
