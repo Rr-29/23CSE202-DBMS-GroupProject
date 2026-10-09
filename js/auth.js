@@ -109,77 +109,47 @@ function initializePasswordToggle() {
 }
 
 function initializeLoginForm() {
-
     const form = document.getElementById("loginForm");
-
     if (!form) return;
 
-    form.addEventListener("submit", (event) => {
-
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         if (!validateLogin(form)) {
-
-            showToast(
-
-                "Please enter valid login details.",
-
-                "error"
-
-            );
-
+            showToast("Please enter valid login details.", "error");
             return;
-
         }
 
         const email = form.querySelector('input[type="email"]').value.trim();
-    const password = form.querySelector('input[type="password"]').value;
+        const password = form.querySelector('input[type="password"]').value;
 
-    showLoader();
+        showLoader();
 
-    setTimeout(() => {
+        try {
+            const res = await AureonAPI.request("/api/auth/login", {
+                method: "POST",
+                body: JSON.stringify({ email, password })
+            });
 
-        hideLoader();
+            hideLoader();
 
-        // Admin Login
-        if (
-            email === "admin@aureon.com" &&
-            password === "Admin@123"
-        ) {
-
-            showToast(
-                "Welcome Administrator!",
-                "success"
-            );
-
-            window.location.href = "admin/dashboard.html";
-            return;
+            if (res.success) {
+                showToast(res.role === "admin" ? "Welcome Administrator!" : "Login Successful!", "success");
+                if (res.role === "admin") {
+                    AureonAPI.setAdmin(res.user);
+                    setTimeout(() => { window.location.href = res.redirect || "admin/dashboard.html"; }, 800);
+                } else {
+                    AureonAPI.setUser(res.user);
+                    setTimeout(() => { window.location.href = res.redirect || "dashboard.html"; }, 800);
+                }
+            } else {
+                showToast(res.message || "Invalid Email or Password", "error");
+            }
+        } catch (err) {
+            hideLoader();
+            showToast("Connection to backend server failed. Please check app.py status.", "error");
         }
-
-        if (
-            email === "user@aureon.com" &&
-            password === "User@123"
-        ) {
-
-            showToast(
-                "Login Successful!",
-                "success"
-            );
-
-            window.location.href = "dashboard.html";
-            return;
-        }
-
-        // Invalid Login
-        showToast(
-            "Invalid Email or Password",
-            "error"
-        );
-
-    }, 1200);
-
     });
-
 }
 
 function validateLogin(form) {
@@ -219,49 +189,59 @@ function validateLogin(form) {
 ==================================================*/
 
 function initializeRegisterForm() {
-
     const form = document.getElementById("registerForm");
-
     if (!form) return;
 
-    form.addEventListener("submit", (event) => {
-
+    form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         if (!validateRegistration(form)) {
-
-            showToast(
-
-                "Please complete all required fields.",
-
-                "warning"
-
-            );
-
+            showToast("Please complete all required fields.", "warning");
             return;
+        }
 
+        const fullName = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("registerEmail").value.trim();
+        const phone = document.getElementById("mobile").value.trim();
+        const password = document.getElementById("registerPassword").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+            showToast("Passwords do not match.", "error");
+            return;
         }
 
         showLoader();
 
-        setTimeout(() => {
+        try {
+            const res = await AureonAPI.request("/api/auth/register", {
+                method: "POST",
+                body: JSON.stringify({
+                    full_name: fullName,
+                    email: email,
+                    phone: phone,
+                    password: password
+                })
+            });
 
             hideLoader();
 
-            showToast(
-
-                "Registration completed successfully.",
-
-                "success"
-
-            );
-
-            form.reset();
-
-        }, 1400);
-
+            if (res.success) {
+                showToast("Account created successfully! Please log in.", "success");
+                form.reset();
+                // Switch to login tab
+                const loginTab = document.getElementById("loginTab");
+                if (loginTab) loginTab.click();
+                const loginEmail = document.getElementById("loginEmail");
+                if (loginEmail) loginEmail.value = email;
+            } else {
+                showToast(res.message || "Registration failed.", "error");
+            }
+        } catch (err) {
+            hideLoader();
+            showToast("Connection to backend server failed.", "error");
+        }
     });
-
 }
 
 function validateRegistration(form) {
