@@ -118,13 +118,17 @@ function initializeLoginForm() {
         event.preventDefault();
 
         if (!validateLogin(form)) {
-            showToast("Please enter valid login details.", "error");
             return;
         }
 
-        const email = form.querySelector('input[type="email"]').value.trim();
-        const password = form.querySelector('input[type="password"]').value;
+        const emailInput = document.getElementById("loginEmail") || form.querySelector('input[type="text"]') || form.querySelector('input[type="email"]');
+        const passwordInput = document.getElementById("loginPassword") || form.querySelector('input[type="password"]');
 
+        const email = emailInput ? emailInput.value.trim() : "";
+        const password = passwordInput ? passwordInput.value : "";
+        const alertBox = document.getElementById("loginAlert");
+
+        if (alertBox) alertBox.style.display = "none";
         showLoader();
 
         try {
@@ -145,46 +149,104 @@ function initializeLoginForm() {
                     setTimeout(() => { window.location.href = res.redirect || "dashboard.html"; }, 800);
                 }
             } else {
-                showToast(res.message || "Invalid Email or Password", "error");
+                const errMsg = res.message || "Invalid Email or Password";
+                showToast(errMsg, "error");
+                if (alertBox) {
+                    alertBox.textContent = errMsg;
+                    alertBox.style.display = "block";
+                }
             }
         } catch (err) {
             hideLoader();
-            showToast("Connection to backend server failed. Please check app.py status.", "error");
+            const errMsg = "Connection to backend server failed. Make sure app is running (python start_server.py).";
+            showToast(errMsg, "error");
+            if (alertBox) {
+                alertBox.textContent = errMsg;
+                alertBox.style.display = "block";
+            }
         }
     });
 }
 
 function validateLogin(form) {
+    const emailInput = document.getElementById("loginEmail") || form.querySelector('input[type="text"]') || form.querySelector('input[type="email"]');
+    const passwordInput = document.getElementById("loginPassword") || form.querySelector('input[type="password"]');
 
-    const email =
+    if (!emailInput || !passwordInput) return false;
 
-        form.querySelector('input[type="email"]');
+    const emailVal = emailInput.value.trim();
+    const passVal = passwordInput.value;
 
-    const password =
-
-        form.querySelector('input[type="password"]');
-
-    if (!email || !password) {
-
+    if (!emailVal) {
+        showToast("Please enter your Email, Username, or Name.", "warning");
+        emailInput.focus();
         return false;
-
     }
 
-    if (!isValidEmail(email.value.trim())) {
-
+    if (!passVal) {
+        showToast("Please enter your Password.", "warning");
+        passwordInput.focus();
         return false;
-
-    }
-
-    if (password.value.trim().length < 6) {
-
-        return false;
-
     }
 
     return true;
-
 }
+
+window.fillLogin = function(identifier, password, autoSubmit = false) {
+    const emailInput = document.getElementById("loginEmail") || document.querySelector('#loginForm input[type="text"], #loginForm input[type="email"]');
+    const passwordInput = document.getElementById("loginPassword") || document.querySelector('#loginForm input[type="password"]');
+    const form = document.getElementById("loginForm");
+
+    // Switch to login tab if currently on register
+    const loginTab = document.getElementById("loginTab");
+    if (loginTab && !loginTab.classList.contains("active")) {
+        loginTab.click();
+    }
+
+    if (emailInput) {
+        emailInput.value = identifier;
+        emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+    if (passwordInput) {
+        passwordInput.value = password;
+        passwordInput.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    const alertBox = document.getElementById("loginAlert");
+    if (alertBox) alertBox.style.display = "none";
+
+    if (autoSubmit && form) {
+        const submitBtn = document.getElementById("btnLoginSubmit") || form.querySelector("button[type='submit']");
+        if (submitBtn) {
+            submitBtn.click();
+        } else {
+            form.requestSubmit ? form.requestSubmit() : form.submit();
+        }
+    } else {
+        if (typeof showToast === "function") {
+            showToast(`Autofilled credentials for ${identifier}. Click Login to enter.`, "info");
+        }
+    }
+};
+
+window.checkServerStatus = async function() {
+    const badge = document.getElementById("serverStatusBadge");
+    if (!badge) return;
+
+    try {
+        const res = await AureonAPI.request("/api/health");
+        if (res && res.status === "online") {
+            badge.className = "server-status-badge online";
+            badge.innerHTML = `<span class="status-dot"></span><span class="status-text">Backend Connected (${(res.database || "SQLite").toUpperCase()}) &bull; Ready</span>`;
+        } else {
+            badge.className = "server-status-badge offline";
+            badge.innerHTML = `<span class="status-dot"></span><span class="status-text">Backend Offline &bull; Run start_server.py</span>`;
+        }
+    } catch (e) {
+        badge.className = "server-status-badge offline";
+        badge.innerHTML = `<span class="status-dot"></span><span class="status-text">Backend Offline &bull; Run start_server.py</span>`;
+    }
+};
 
 /*==================================================
     Registration Form

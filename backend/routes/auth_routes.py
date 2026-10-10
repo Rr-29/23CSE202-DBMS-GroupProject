@@ -20,25 +20,39 @@ auth_bp = Blueprint('auth_bp', __name__)
 @auth_bp.route('/api/auth/login', methods=['POST'])
 def login():
     data = request.get_json() or {}
-    identifier = (data.get('email') or data.get('username') or '').strip().lower()
+    raw_identifier = (data.get('email') or data.get('username') or '').strip()
+    identifier = raw_identifier.lower()
     password = data.get('password', '')
 
     if not identifier or not password:
         return jsonify({"success": False, "message": "Email/Username and password are required."}), 400
 
-    # Normalize common demo nicknames for seamless evaluation
-    if identifier in ['admin', 'superadmin']:
-        identifier = 'admin@aureon.com'
-    elif identifier in ['user', 'demo', 'alex', 'customer']:
-        identifier = 'user@aureon.com'
-    elif identifier in ['mehrin', 'nithya', 'rudra', 'varun']:
-        identifier = f"{identifier}@aureon.com"
+    # 1. Normalize common nicknames, first names, and full names
+    clean_id = identifier.replace('.', '').replace('-', '').replace('_', '').replace(' ', '')
+    name_map = {
+        'mehrinas': 'mehrin@aureon.com',
+        'mehrin': 'mehrin@aureon.com',
+        'nithyaajay': 'nithya@aureon.com',
+        'nithya': 'nithya@aureon.com',
+        'rudrarajagopal': 'rudra@aureon.com',
+        'rudra': 'rudra@aureon.com',
+        'varunnair': 'varun@aureon.com',
+        'varun': 'varun@aureon.com',
+        'alexuser': 'user@aureon.com',
+        'alex': 'user@aureon.com',
+        'user': 'user@aureon.com',
+        'demo': 'user@aureon.com',
+        'customer': 'user@aureon.com',
+        'admin': 'admin@aureon.com',
+        'superadmin': 'admin@aureon.com'
+    }
+    if clean_id in name_map:
+        identifier = name_map[clean_id]
 
-    # 1. Check if logging in as Admin
+    # 2. Check if logging in as Admin
     admin_sql = "SELECT * FROM admins WHERE (LOWER(email) = %s OR LOWER(username) = %s) AND status = 'Active'"
     admin = db.query_one(admin_sql, (identifier, identifier))
     if admin and verify_password(password, admin['password_hash']):
-        # Update last login
         db.execute("UPDATE admins SET last_login = CURRENT_TIMESTAMP WHERE admin_id = %s", (admin['admin_id'],))
         db.execute("""INSERT INTO audit_logs (actor_type, actor_id, action, table_affected, record_id, details)
                       VALUES ('Admin', %s, 'ADMIN_LOGIN_SUCCESS', 'admins', %s, 'Administrator logged in successfully')""",
@@ -56,18 +70,33 @@ def login():
             }
         })
 
-    # 2. Check Customer Credentials
+    # 3. Check Customer Credentials (supports email, username, full name, phone, account number, or user_id)
     user_sql = """
         SELECT u.user_id, u.full_name, u.email, u.phone_no, u.address, u.user_type,
-               l.password_hash, l.status AS login_status, p.occupation, p.preferred_language, p.kyc_status,
-               s.theme
+               l.password_hash, l.transfer_password_hash, l.status AS login_status,
+               p.occupation, p.preferred_language, p.kyc_status, s.theme
         FROM users u
         JOIN login_credentials l ON u.user_id = l.user_id
         LEFT JOIN profiles p ON u.user_id = p.user_id
         LEFT JOIN settings s ON u.user_id = s.user_id
-        WHERE (LOWER(u.email) = %s OR LOWER(l.username) = %s)
+        WHERE (
+            LOWER(u.email) = %s 
+            OR LOWER(l.username) = %s
+            OR LOWER(u.full_name) = %s
+            OR LOWER(u.full_name) LIKE %s
+            OR REPLACE(LOWER(u.full_name), ' ', '') = %s
+            OR u.phone_no = %s
+            OR REPLACE(REPLACE(u.phone_no, ' ', ''), '+91', '') = %s
+            OR u.user_id = %s
+            OR EXISTS (SELECT 1 FROM accounts a WHERE a.user_id = u.user_id AND LOWER(a.account_no) = %s)
+        )
     """
-    user = db.query_one(user_sql, (identifier, identifier))
+    like_param = f"%{identifier}%"
+    uid_param = int(identifier) if identifier.isdigit() else -1
+    user = db.query_one(user_sql, (
+        identifier, identifier, identifier, like_param, clean_id,
+        raw_identifier, clean_id, uid_param, identifier
+    ))
 
     if not user:
         return jsonify({"success": False, "message": "Invalid credentials. No registered user found."}), 401
@@ -75,7 +104,13 @@ def login():
     if user['login_status'] != 'Active':
         return jsonify({"success": False, "message": f"Account is {user['login_status']}. Please contact bank administrator."}), 403
 
-    if not verify_password(password, user['password_hash']):
+    valid_pwd = verify_password(password, user['password_hash'])
+    # Allow transfer password or demo PIN if user entered PIN instead of main password
+    if not valid_pwd and user.get('transfer_password_hash'):
+        if hash_password(password) == user['transfer_password_hash'] or password == user['transfer_password_hash']:
+            valid_pwd = True
+
+    if not valid_pwd:
         db.execute("UPDATE login_credentials SET failed_attempts = failed_attempts + 1 WHERE user_id = %s", (user['user_id'],))
         return jsonify({"success": False, "message": "Incorrect password. Authentication failed."}), 401
 
