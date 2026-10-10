@@ -24,6 +24,29 @@ import time
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
 
+# Auto-check and install dependencies if running on a new machine
+required_modules = ['flask', 'flask_cors', 'pymysql', 'cryptography']
+missing_modules = []
+for mod in required_modules:
+    try:
+        __import__(mod)
+    except ImportError:
+        pkg_name = 'flask-cors' if mod == 'flask_cors' else mod
+        missing_modules.append(pkg_name)
+
+if missing_modules:
+    import subprocess
+    print("*" * 75)
+    print(f"[*] First-time setup detected: Installing missing packages ({', '.join(missing_modules)})...")
+    print("[*] Please wait a moment while pip installs requirements...")
+    print("*" * 75)
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", *missing_modules, "--quiet"])
+        print("[+] Packages installed successfully! Starting server...\n")
+    except Exception as e:
+        print(f"[-] Could not auto-install packages: {e}")
+        print("Please run manually in terminal: pip install -r requirements.txt\n")
+
 from app import app
 from database.db import db
 
