@@ -306,7 +306,8 @@ def settings():
 @auth_bp.route('/api/user/change-password', methods=['POST'])
 def change_password():
     data = request.get_json() or {}
-    user_id = data.get('user_id') or 1
+    user_id = data.get('user_id') or request.headers.get('X-User-Id') or 1
+    user_id = int(user_id)
     current_pwd = data.get('current_password', '')
     new_pwd = data.get('new_password', '')
 

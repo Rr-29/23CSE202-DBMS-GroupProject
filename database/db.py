@@ -39,26 +39,30 @@ def hash_password(password: str) -> str:
 
 
 def verify_password(plain_password: str, stored_hash: str) -> bool:
-    """Verify password supporting direct hash, case-insensitivity, and demo fallbacks."""
-    if not plain_password:
+    """Verify password supporting direct hash, case-insensitivity, and demo seed fallbacks."""
+    if not plain_password or not stored_hash:
         return False
     pwd_clean = str(plain_password).strip()
     pwd_lower = pwd_clean.lower()
 
-    # 1. Flexible demo credentials (case-insensitive for smooth evaluations)
-    demo_passwords = {"user@123", "admin@123", "user123", "admin123", "password", "123456", "1234", "admin", "user", "demo"}
-    if pwd_lower in demo_passwords:
-        return True
-
-    # 2. Direct cryptographic hash check
+    # 1. Direct cryptographic hash check
     if hash_password(pwd_clean) == stored_hash:
         return True
     if hash_password(pwd_clean.capitalize()) == stored_hash:
         return True
 
-    # 3. Direct match
-    if pwd_clean == stored_hash or pwd_lower == str(stored_hash).lower():
+    # 2. Direct plain text match
+    if pwd_clean == stored_hash:
         return True
+
+    # 3. Default seed password fallback ONLY if account is still using initial default seed hash
+    # Once an account updates their password, stored_hash changes and old passwords will NOT work.
+    default_user_hash = hash_password("User@123")
+    default_admin_hash = hash_password("Admin@123")
+    if stored_hash in (default_user_hash, default_admin_hash):
+        demo_passwords = {"user@123", "admin@123", "user123", "admin123", "password", "123456", "1234", "admin", "user", "demo"}
+        if pwd_lower in demo_passwords:
+            return True
 
     # 4. Werkzeug hash fallback
     if str(stored_hash).startswith("scrypt:") or "securehash" in str(stored_hash):
@@ -157,6 +161,23 @@ class Database:
                 conn.commit()
             except Exception:
                 pass
+
+            # Upgrade cards table with pin and controls columns if needed
+            card_upgrades = [
+                ("pin", "TEXT DEFAULT '1234'"),
+                ("online_tx", "INTEGER DEFAULT 1"),
+                ("intl_usage", "INTEGER DEFAULT 0"),
+                ("atm_usage", "INTEGER DEFAULT 1"),
+                ("atm_limit", "REAL DEFAULT 1000.00"),
+                ("online_limit", "REAL DEFAULT 3500.00"),
+                ("contactless_limit", "REAL DEFAULT 250.00")
+            ]
+            for col_name, col_def in card_upgrades:
+                try:
+                    cursor.execute(f"ALTER TABLE cards ADD COLUMN {col_name} {col_def}")
+                    conn.commit()
+                except Exception:
+                    pass
         conn.close()
 
     def _create_sqlite_schema(self, conn: sqlite3.Connection):
@@ -233,7 +254,14 @@ class Database:
             cvv TEXT NOT NULL,
             daily_limit REAL DEFAULT 5000.00,
             status TEXT DEFAULT 'Active' CHECK(status IN ('Active', 'Frozen', 'Blocked', 'Expired')),
-            issue_date TEXT NOT NULL
+            issue_date TEXT NOT NULL,
+            pin TEXT DEFAULT '1234',
+            online_tx INTEGER DEFAULT 1,
+            intl_usage INTEGER DEFAULT 0,
+            atm_usage INTEGER DEFAULT 1,
+            atm_limit REAL DEFAULT 1000.00,
+            online_limit REAL DEFAULT 3500.00,
+            contactless_limit REAL DEFAULT 250.00
         );
 
         -- 7. BENEFICIARIES

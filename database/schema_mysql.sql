@@ -111,6 +111,13 @@ CREATE TABLE cards (
     daily_limit DECIMAL(12, 2) DEFAULT 5000.00,
     status ENUM('Active', 'Frozen', 'Blocked', 'Expired') DEFAULT 'Active',
     issue_date DATE NOT NULL,
+    pin VARCHAR(10) DEFAULT '1234',
+    online_tx BOOLEAN DEFAULT 1,
+    intl_usage BOOLEAN DEFAULT 0,
+    atm_usage BOOLEAN DEFAULT 1,
+    atm_limit DECIMAL(12, 2) DEFAULT 1000.00,
+    online_limit DECIMAL(12, 2) DEFAULT 3500.00,
+    contactless_limit DECIMAL(12, 2) DEFAULT 250.00,
     CONSTRAINT fk_card_account FOREIGN KEY (account_no) 
         REFERENCES accounts(account_no) ON DELETE CASCADE
 ) ENGINE=InnoDB;

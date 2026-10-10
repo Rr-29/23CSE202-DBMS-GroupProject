@@ -412,6 +412,21 @@
     );
 }
 
+.bank-card-preview.card-selected{
+    outline: 3px solid #F59E0B;
+    box-shadow: 0 10px 25px rgba(245, 158, 11, 0.35);
+    transform: translateY(-3px);
+}
+
+.bank-card-preview.card-blocked{
+    background: linear-gradient(135deg, #7F1D1D 0%, #B91C1C 100%) !important;
+    filter: grayscale(20%);
+}
+
+.bank-card-preview.card-frozen{
+    background: linear-gradient(135deg, #0F766E 0%, #0E7490 100%) !important;
+}
+
 .card-header{
     display:flex;
     justify-content:space-between;
