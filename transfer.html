@@ -167,7 +167,7 @@
                         <div class="input-group">
 
                             <label for="beneficiary">
-                                Beneficiary
+                                Beneficiary / Payee
                             </label>
 
                             <select id="beneficiary" required>
@@ -176,20 +176,21 @@
                                     Select Beneficiary
                                 </option>
 
-                                <option>
-                                    Alex Johnson
-                                </option>
-
-                                <option>
-                                    Sarah Williams
-                                </option>
-
-                                <option>
-                                    Michael Brown
-                                </option>
-
                             </select>
 
+                        </div>
+
+                        <!-- Quick Pay Group D4 Teammate -->
+                        <div style="margin-bottom: 18px; background: #F8FAFC; border: 1px solid #E2E8F0; padding: 10px 12px; border-radius: 10px;">
+                            <small style="color: #475569; font-weight: 600; display: block; margin-bottom: 6px;">
+                                <i class="fa-solid fa-users" style="color: #2563EB;"></i> Quick Pay Group D4 Member:
+                            </small>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                                <button type="button" class="btn btn-outline btn-sm" onclick="selectTeammateRecipient('AUR100234822', 'Mehrin A S')" style="font-size: 0.78rem; padding: 4px 8px;">Mehrin</button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="selectTeammateRecipient('AUR100234823', 'Nithya Ajay')" style="font-size: 0.78rem; padding: 4px 8px;">Nithya</button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="selectTeammateRecipient('AUR100234824', 'Rudra Rajagopal')" style="font-size: 0.78rem; padding: 4px 8px;">Rudra</button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="selectTeammateRecipient('AUR100234825', 'Varun Nair')" style="font-size: 0.78rem; padding: 4px 8px;">Varun</button>
+                            </div>
                         </div>
 
                         <div class="input-group">
@@ -203,6 +204,7 @@
                                 id="amount"
                                 placeholder="Enter transfer amount"
                                 min="1"
+                                step="0.01"
                                 required>
 
                         </div>
@@ -215,25 +217,12 @@
 
                             <select id="purpose">
 
-                                <option>
-                                    Personal
-                                </option>
-
-                                <option>
-                                    Business
-                                </option>
-
-                                <option>
-                                    Rent
-                                </option>
-
-                                <option>
-                                    Shopping
-                                </option>
-
-                                <option>
-                                    Other
-                                </option>
+                                <option value="Personal">Personal</option>
+                                <option value="Education">College / Tuition</option>
+                                <option value="Business">Business</option>
+                                <option value="Rent">Rent</option>
+                                <option value="Utilities">Utilities</option>
+                                <option value="Other">Other</option>
 
                             </select>
 
@@ -247,18 +236,55 @@
 
                             <textarea
                                 id="remarks"
-                                rows="4"
-                                placeholder="Optional remarks"></textarea>
+                                rows="3"
+                                placeholder="Optional payment note or description"></textarea>
+
+                        </div>
+
+                        <!-- Secure Transfer Password / Transaction PIN -->
+                        <div class="input-group" style="margin-top: 15px; margin-bottom: 20px;">
+
+                            <label for="transferPassword" style="display: flex; align-items: center; justify-content: space-between;">
+                                <span><i class="fa-solid fa-lock" style="color: #2563EB;"></i> Transfer Password / Security PIN</span>
+                                <a href="javascript:void(0)" onclick="openTransferPasswordModal()" style="font-size: 0.8rem; color: #2563EB; font-weight: 600; text-decoration: underline;">
+                                    <i class="fa-solid fa-key"></i> Edit Password
+                                </a>
+                            </label>
+
+                            <div class="password-box">
+
+                                <input
+                                    type="password"
+                                    id="transferPassword"
+                                    placeholder="Enter your transfer password (Default: 1234 or User@123)"
+                                    required
+                                    autocomplete="current-password">
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    id="toggleTransferPassword">
+
+                                    <i class="fa-solid fa-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                            <small style="color: #64748B; font-size: 0.8rem; display: block; margin-top: 4px;">
+                                Required to authorize debit. Default: <code>1234</code> or <code>User@123</code>.
+                            </small>
 
                         </div>
 
                         <button
                             type="submit"
-                            class="btn btn-primary">
+                            class="btn btn-primary full-width"
+                            id="btnConfirmTransfer">
 
                             <i class="fa-solid fa-paper-plane"></i>
 
-                            Confirm Transfer
+                            Confirm & Execute Transfer
 
                         </button>
 

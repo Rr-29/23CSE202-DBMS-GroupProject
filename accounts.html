@@ -150,11 +150,11 @@
 
                     <i class="fa-solid fa-piggy-bank"></i>
 
-                    <h3>Savings Account</h3>
+                    <h3>Savings Balance</h3>
 
-                    <h2>$18,520.75</h2>
+                    <h2 id="statSavingsBalance">$0.00</h2>
 
-                    <small>Available Balance</small>
+                    <small>Primary Savings</small>
 
                 </article>
 
@@ -162,11 +162,11 @@
 
                     <i class="fa-solid fa-building-columns"></i>
 
-                    <h3>Current Account</h3>
+                    <h3>Checking Balance</h3>
 
-                    <h2>$4,760.25</h2>
+                    <h2 id="statCurrentBalance">$0.00</h2>
 
-                    <small>Business Transactions</small>
+                    <small>Operating Accounts</small>
 
                 </article>
 
@@ -174,11 +174,11 @@
 
                     <i class="fa-solid fa-vault"></i>
 
-                    <h3>Fixed Deposit</h3>
+                    <h3>Total Net Worth</h3>
 
-                    <h2>$30,000.00</h2>
+                    <h2 id="statTotalBalance">$0.00</h2>
 
-                    <small>Matures in 210 Days</small>
+                    <small>Combined Portfolio Balance</small>
 
                 </article>
 
@@ -192,7 +192,7 @@
 
                     <h2>Account Details</h2>
 
-                    <button class="btn btn-primary">
+                    <button class="btn btn-primary" id="btnOpenNewAccount">
 
                         <i class="fa-solid fa-plus"></i>
 
@@ -218,7 +218,7 @@
 
                     </thead>
 
-                    <tbody>
+                    <tbody id="accountsTableBody">
 
                         <tr>
 

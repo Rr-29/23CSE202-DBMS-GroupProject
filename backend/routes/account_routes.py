@@ -97,11 +97,12 @@ def get_account_details(account_no):
 @account_bp.route('/api/accounts/open', methods=['POST'])
 def open_account():
     data = request.get_json() or {}
-    user_id = data.get('user_id') or 1
+    user_id = data.get('user_id') or request.headers.get('X-User-Id') or request.args.get('user_id') or 1
+    user_id = int(user_id)
     account_type = data.get('account_type', 'Savings')
     initial_deposit = float(data.get('initial_deposit', 100.00))
 
-    result = db.open_account(int(user_id), account_type, initial_deposit)
+    result = db.open_account(user_id, account_type, initial_deposit)
     if result.get('success'):
         return jsonify(result), 201
     return jsonify(result), 400

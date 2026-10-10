@@ -16,6 +16,8 @@ function initializeAuth() {
 
     initializeRegisterForm();
 
+    checkServerStatus();
+
 }
 
 function initializeAuthSwitch() {

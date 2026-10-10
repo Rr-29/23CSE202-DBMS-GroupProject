@@ -10,6 +10,7 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/auth.css">
 </head>
 
@@ -75,15 +76,18 @@
                         Login to continue to your Aureon account.
                     </p>
 
+                    <div id="loginAlert" class="auth-alert" style="display: none;"></div>
+
                     <div class="input-group">
 
-                        <label>Email Address</label>
+                        <label>Email Address or Username</label>
 
                         <input
-                            type="email"
+                            type="text"
                             id="loginEmail"
-                            placeholder="Enter your email"
-                            required>
+                            placeholder="user@aureon.com or admin@aureon.com"
+                            required
+                            autocomplete="username">
 
                     </div>
 
@@ -96,8 +100,9 @@
                             <input
                                 type="password"
                                 id="loginPassword"
-                                placeholder="Enter your password"
-                                required>
+                                placeholder="User@123 or Admin@123"
+                                required
+                                autocomplete="current-password">
 
                             <button
                                 type="button"
@@ -112,11 +117,33 @@
 
                     </div>
 
+                    <!-- Quick Demo Credentials for Evaluation & Testing -->
+                    <div class="demo-accounts-card">
+                        <div class="demo-title">
+                            <i class="fa-solid fa-bolt"></i> Quick Demo Logins (Click to Autofill)
+                        </div>
+                        <div class="demo-buttons">
+                            <button type="button" class="btn-demo" onclick="fillLogin('user@aureon.com', 'User@123', true)">
+                                <i class="fa-solid fa-user"></i> Customer Demo
+                            </button>
+                            <button type="button" class="btn-demo admin-demo" onclick="fillLogin('admin@aureon.com', 'Admin@123', true)">
+                                <i class="fa-solid fa-shield-halved"></i> Admin Console
+                            </button>
+                        </div>
+                        <div class="demo-teammates">
+                            <span class="team-label">Group D4:</span>
+                            <a href="javascript:void(0)" onclick="fillLogin('mehrin@aureon.com', 'User@123')">Mehrin</a> &bull;
+                            <a href="javascript:void(0)" onclick="fillLogin('nithya@aureon.com', 'User@123')">Nithya</a> &bull;
+                            <a href="javascript:void(0)" onclick="fillLogin('rudra@aureon.com', 'User@123')">Rudra</a> &bull;
+                            <a href="javascript:void(0)" onclick="fillLogin('varun@aureon.com', 'User@123')">Varun</a>
+                        </div>
+                    </div>
+
                     <div class="form-options">
 
                         <label>
 
-                            <input type="checkbox">
+                            <input type="checkbox" checked>
 
                             Remember Me
 
@@ -128,9 +155,15 @@
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary full-width">
+                    <button type="submit" class="btn btn-primary full-width" id="btnLoginSubmit">
                         Login
                     </button>
+
+                    <!-- Real-Time Backend Connectivity Badge -->
+                    <div id="serverStatusBadge" class="server-status-badge">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Checking backend connection...</span>
+                    </div>
 
                 </form>
 
@@ -141,6 +174,8 @@
                     <p>
                         Open your Aureon digital banking account.
                     </p>
+
+                    <div id="registerAlert" class="auth-alert" style="display: none;"></div>
 
                     <div class="input-group">
 

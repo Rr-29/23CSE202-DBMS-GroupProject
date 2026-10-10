@@ -504,3 +504,174 @@
     }
 
 }
+
+/* ==========================================================================
+   Quick Demo Credentials & Live Backend Status Panel (Group D4 DBMS)
+   ========================================================================== */
+.demo-accounts-card {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin: 16px 0;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.05);
+}
+
+.demo-accounts-card .demo-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #1E40AF;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.demo-accounts-card .demo-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.btn-demo {
+    flex: 1;
+    background: #2563EB;
+    color: #ffffff;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.btn-demo:hover {
+    background: #1D4ED8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+.btn-demo.admin-demo {
+    background: #4F46E5;
+    box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+}
+
+.btn-demo.admin-demo:hover {
+    background: #4338CA;
+    box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
+}
+
+.demo-teammates {
+    color: #4B5563;
+    font-size: 0.76rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-top: 6px;
+    border-top: 1px dashed #DBEAFE;
+}
+
+.demo-teammates .team-label {
+    font-weight: 600;
+    color: #1F2937;
+}
+
+.demo-teammates a {
+    color: #2563EB;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 500;
+    background: #DBEAFE;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.demo-teammates a:hover {
+    background: #BFDBFE;
+    color: #1E40AF;
+}
+
+.server-status-badge {
+    margin-top: 14px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #F8FAFC;
+    color: #475569;
+    border: 1px solid #E2E8F0;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.server-status-badge.online {
+    background: #ECFDF5;
+    color: #065F46;
+    border-color: #A7F3D0;
+}
+
+.server-status-badge.offline {
+    background: #FFFBEB;
+    color: #92400E;
+    border-color: #FDE68A;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #94A3B8;
+    display: inline-block;
+}
+
+.server-status-badge.online .status-dot {
+    background: #10B981;
+    box-shadow: 0 0 6px #10B981;
+}
+
+.server-status-badge.offline .status-dot {
+    background: #F59E0B;
+}
+
+.auth-alert {
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 0.88rem;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideToast 0.3s ease;
+}
+
+.auth-alert.error {
+    background: #FEF2F2;
+    color: #991B1B;
+    border: 1px solid #FECACA;
+}
+
+.auth-alert.success {
+    background: #ECFDF5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+}
+
+.auth-alert.warning {
+    background: #FFFBEB;
+    color: #92400E;
+    border: 1px solid #FDE68A;
+}

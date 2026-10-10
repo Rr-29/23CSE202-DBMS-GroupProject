@@ -112,7 +112,7 @@
 
                 </div>
 
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="btnSaveProfile">
 
                     <i class="fa-solid fa-floppy-disk"></i>
 
@@ -126,18 +126,18 @@
 
                 <div class="profile-avatar">
 
-                    <img src="assets/images/profile.png"
+                    <img id="profileAvatarImg" src="assets/images/profile.png"
                         alt="Profile Photo">
 
                 </div>
 
                 <div class="profile-info">
 
-                    <h2>User</h2>
+                    <h2 id="profileDisplayName">User</h2>
 
-                    <p>Premium Banking Customer</p>
+                    <p id="profileDisplayOccupation">Banking Customer</p>
 
-                    <span class="badge success">
+                    <span class="badge success" id="profileDisplayKyc">
 
                         <i class="fa-solid fa-circle-check"></i>
 
@@ -147,13 +147,15 @@
 
                 </div>
 
-                <button class="btn btn-outline">
+                <button class="btn btn-outline" id="btnChangePhoto" type="button">
 
                     <i class="fa-solid fa-camera"></i>
 
                     Change Photo
 
                 </button>
+
+                <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
 
             </section>
 
@@ -163,7 +165,7 @@
 
                     <h2>Personal Information</h2>
 
-                    <form>
+                    <form id="personalInfoForm" onsubmit="return false;">
 
                         <div class="input-group">
 
@@ -171,7 +173,8 @@
 
                             <input
                                 type="text"
-                                value="User">
+                                id="profileFullName"
+                                placeholder="Enter Full Name">
 
                         </div>
 
@@ -181,7 +184,10 @@
 
                             <input
                                 type="email"
-                                value="user.doe@example.com">
+                                id="profileEmail"
+                                readonly
+                                style="background: #F1F5F9; cursor: not-allowed;"
+                                title="Email address cannot be changed directly">
 
                         </div>
 
@@ -191,7 +197,8 @@
 
                             <input
                                 type="tel"
-                                value="+1 987 654 3210">
+                                id="profilePhone"
+                                placeholder="Enter Mobile Number">
 
                         </div>
 
@@ -201,7 +208,7 @@
 
                             <input
                                 type="date"
-                                value="1998-04-15">
+                                id="profileDob">
 
                         </div>
 
@@ -211,7 +218,8 @@
 
                             <input
                                 type="text"
-                                value="Software Engineer">
+                                id="profileOccupation"
+                                placeholder="Enter Occupation">
 
                         </div>
 
@@ -221,9 +229,9 @@
 
                 <div class="glass-card">
 
-                    <h2>Address Information</h2>
+                    <h2>Address & Bio</h2>
 
-                    <form>
+                    <form id="addressInfoForm" onsubmit="return false;">
 
                         <div class="input-group">
 
@@ -231,49 +239,36 @@
 
                             <input
                                 type="text"
-                                value="245 Park Avenue">
+                                id="profileAddress"
+                                placeholder="Enter Full Address">
 
                         </div>
 
                         <div class="input-group">
 
-                            <label>City</label>
+                            <label>City / Location</label>
 
                             <input
                                 type="text"
-                                value="New York">
+                                id="profileCity"
+                                placeholder="Enter City">
 
                         </div>
 
                         <div class="input-group">
 
-                            <label>State</label>
+                            <label>About Me / Bio</label>
 
                             <input
                                 type="text"
-                                value="New York">
+                                id="profileBio"
+                                placeholder="Short profile description">
 
                         </div>
 
-                        <div class="input-group">
-
-                            <label>ZIP Code</label>
-
-                            <input
-                                type="text"
-                                value="10017">
-
-                        </div>
-
-                        <div class="input-group">
-
-                            <label>Country</label>
-
-                            <input
-                                type="text"
-                                value="United States">
-
-                        </div>
+                        <button type="button" class="btn btn-primary" id="btnSaveProfileBottom" style="margin-top: 15px; width: 100%;">
+                            <i class="fa-solid fa-floppy-disk"></i> Save Profile Details
+                        </button>
 
                     </form>
 

@@ -33,7 +33,8 @@ def get_beneficiaries():
 @transfer_bp.route('/api/beneficiaries/add', methods=['POST'])
 def add_beneficiary():
     data = request.get_json() or {}
-    user_id = data.get('user_id') or 1
+    user_id = data.get('user_id') or request.headers.get('X-User-Id') or request.args.get('user_id') or 1
+    user_id = int(user_id)
     name = data.get('name', '').strip()
     account_no = data.get('account_no', '').strip()
     bank_name = data.get('bank_name', 'Aureon Bank').strip()
@@ -66,13 +67,15 @@ def delete_beneficiary(ben_id):
 @transfer_bp.route('/api/transfers/execute', methods=['POST'])
 def execute_transfer():
     data = request.get_json() or {}
-    user_id = data.get('user_id') or 1
-    source_acc = data.get('source_account', '').strip()
+    user_id = data.get('user_id') or request.headers.get('X-User-Id') or request.args.get('user_id') or 1
+    user_id = int(user_id)
+    source_acc = str(data.get('source_account') or data.get('from_account') or '').strip()
     beneficiary_id = data.get('beneficiary_id')
-    dest_acc = data.get('dest_account')
+    dest_acc = data.get('dest_account') or data.get('to_account')
     amount = float(data.get('amount', 0.00))
     purpose = data.get('purpose', 'Personal')
     remarks = data.get('remarks', '')
+    transfer_password = data.get('transfer_password', '').strip()
 
     if not source_acc:
         return jsonify({"success": False, "message": "Please select a source account."}), 400
@@ -80,17 +83,25 @@ def execute_transfer():
     if not beneficiary_id and not dest_acc:
         return jsonify({"success": False, "message": "Please select a recipient beneficiary or enter an account number."}), 400
 
+    if not transfer_password:
+        return jsonify({"success": False, "message": "Transfer Password / Security PIN is required to authorize transfer."}), 400
+
     if beneficiary_id:
-        beneficiary_id = int(beneficiary_id)
+        try:
+            beneficiary_id = int(beneficiary_id)
+        except (ValueError, TypeError):
+            dest_acc = str(beneficiary_id)
+            beneficiary_id = None
 
     result = db.execute_transfer(
-        user_id=int(user_id),
+        user_id=user_id,
         source_acc=source_acc,
         beneficiary_id=beneficiary_id,
         dest_acc=dest_acc,
         amount=amount,
         purpose=purpose,
-        remarks=remarks
+        remarks=remarks,
+        transfer_password=transfer_password
     )
 
     status_code = 200 if result.get('success') else 400

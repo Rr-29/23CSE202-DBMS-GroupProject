@@ -35,59 +35,147 @@ async function initializeProfilePage() {
     const p = res.profile;
 
     // Profile header
-    const headerH2 = document.querySelector(".profile-info h2");
+    const headerH2 = document.getElementById("profileDisplayName") || document.querySelector(".profile-info h2");
     if (headerH2) headerH2.textContent = p.full_name;
-    const headerP = document.querySelector(".profile-info p");
+
+    const headerP = document.getElementById("profileDisplayOccupation") || document.querySelector(".profile-info p");
     if (headerP) headerP.textContent = p.occupation || "Banking Customer";
 
-    // Input fields in Personal Information
-    const personalInputs = document.querySelectorAll(".dashboard-grid:nth-of-type(1) .glass-card:nth-child(1) input");
-    if (personalInputs.length >= 5) {
-        personalInputs[0].value = p.full_name || "";
-        personalInputs[1].value = p.email || "";
-        personalInputs[2].value = p.phone_no || "";
-        personalInputs[3].value = p.date_of_birth || "";
-        personalInputs[4].value = p.occupation || "";
+    const avatarImg = document.getElementById("profileAvatarImg") || document.querySelector(".profile-avatar img");
+    if (avatarImg && p.profile_picture) {
+        avatarImg.src = p.profile_picture;
     }
 
-    // Input fields in Address Information
-    const addressInputs = document.querySelectorAll(".dashboard-grid:nth-of-type(1) .glass-card:nth-child(2) input");
-    if (addressInputs.length >= 1) {
-        addressInputs[0].value = p.address || "";
-    }
+    // Populate Input fields by explicit ID
+    const nameInput = document.getElementById("profileFullName");
+    if (nameInput) nameInput.value = p.full_name || "";
 
-    // Save Changes Header Button
-    const saveBtn = document.querySelector(".topbar button.btn-primary") || document.querySelector("header.topbar button");
-    if (saveBtn) {
-        saveBtn.addEventListener("click", async () => {
-            const updatedName = personalInputs[0] ? personalInputs[0].value.trim() : p.full_name;
-            const updatedPhone = personalInputs[2] ? personalInputs[2].value.trim() : p.phone_no;
-            const updatedOccupation = personalInputs[4] ? personalInputs[4].value.trim() : p.occupation;
-            const updatedAddress = addressInputs[0] ? addressInputs[0].value.trim() : p.address;
+    const emailInput = document.getElementById("profileEmail");
+    if (emailInput) emailInput.value = p.email || "";
 
-            const saveRes = await AureonAPI.request("/api/user/profile", {
-                method: "POST",
-                body: JSON.stringify({
-                    full_name: updatedName,
-                    phone_no: updatedPhone,
-                    occupation: updatedOccupation,
-                    address: updatedAddress
-                })
-            });
+    const phoneInput = document.getElementById("profilePhone");
+    if (phoneInput) phoneInput.value = p.phone_no || "";
 
-            if (saveRes.success) {
-                AureonAPI.showToast("Profile updated successfully!", "success");
-                // Update local storage
-                user.name = updatedName;
-                user.phone = updatedPhone;
-                user.address = updatedAddress;
-                AureonAPI.setUser(user);
-                if (topName) topName.textContent = updatedName;
-                if (headerH2) headerH2.textContent = updatedName;
-            } else {
-                AureonAPI.showToast(saveRes.message || "Failed to update profile.", "error");
-            }
+    const dobInput = document.getElementById("profileDob");
+    if (dobInput) dobInput.value = p.date_of_birth || "";
+
+    const occInput = document.getElementById("profileOccupation");
+    if (occInput) occInput.value = p.occupation || "";
+
+    const addressInput = document.getElementById("profileAddress");
+    if (addressInput) addressInput.value = p.address || "";
+
+    const cityInput = document.getElementById("profileCity");
+    if (cityInput) cityInput.value = p.city || "New York";
+
+    const bioInput = document.getElementById("profileBio");
+    if (bioInput) bioInput.value = p.bio || "";
+
+    // 1. CHANGE PHOTO HANDLER
+    const changePhotoBtn = document.getElementById("btnChangePhoto");
+    const fileInput = document.getElementById("avatarFileInput");
+
+    if (changePhotoBtn && fileInput) {
+        changePhotoBtn.addEventListener("click", () => {
+            fileInput.click();
         });
+
+        fileInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith("image/")) {
+                AureonAPI.showToast("Please choose an image file (PNG/JPG).", "warning");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                const dataUrl = event.target.result;
+
+                // Update UI immediately
+                if (avatarImg) avatarImg.src = dataUrl;
+                document.querySelectorAll(".profile-dropdown img, .sidebar-logo img").forEach(img => {
+                    img.src = dataUrl;
+                });
+
+                // Save to database
+                const photoRes = await AureonAPI.request("/api/user/profile", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        profile_picture: dataUrl
+                    })
+                });
+
+                if (photoRes.success) {
+                    AureonAPI.showToast("Profile photo updated successfully!", "success");
+                    // Persist to local storage
+                    user.profile_picture = dataUrl;
+                    AureonAPI.setUser(user);
+                } else {
+                    AureonAPI.showToast(photoRes.message || "Failed to save photo.", "error");
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // 2. SAVE CHANGES HANDLER (Top button and Bottom button)
+    async function handleProfileSave(btn) {
+        const updatedName = nameInput ? nameInput.value.trim() : p.full_name;
+        const updatedPhone = phoneInput ? phoneInput.value.trim() : p.phone_no;
+        const updatedOccupation = occInput ? occInput.value.trim() : p.occupation;
+        const updatedAddress = addressInput ? addressInput.value.trim() : p.address;
+        const updatedBio = bioInput ? bioInput.value.trim() : p.bio;
+
+        if (!updatedName) {
+            AureonAPI.showToast("Full Name cannot be empty.", "warning");
+            return;
+        }
+
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+        const saveRes = await AureonAPI.request("/api/user/profile", {
+            method: "POST",
+            body: JSON.stringify({
+                full_name: updatedName,
+                phone_no: updatedPhone,
+                occupation: updatedOccupation,
+                address: updatedAddress,
+                bio: updatedBio
+            })
+        });
+
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+
+        if (saveRes.success) {
+            AureonAPI.showToast("Profile changes saved successfully to database!", "success");
+            // Update local storage
+            user.name = updatedName;
+            user.phone = updatedPhone;
+            user.address = updatedAddress;
+            user.occupation = updatedOccupation;
+            AureonAPI.setUser(user);
+
+            if (topName) topName.textContent = updatedName;
+            if (headerH2) headerH2.textContent = updatedName;
+            if (headerP) headerP.textContent = updatedOccupation;
+        } else {
+            AureonAPI.showToast(saveRes.message || "Failed to update profile.", "error");
+        }
+    }
+
+    const saveTopBtn = document.getElementById("btnSaveProfile") || document.querySelector(".topbar button.btn-primary");
+    if (saveTopBtn) {
+        saveTopBtn.addEventListener("click", () => handleProfileSave(saveTopBtn));
+    }
+
+    const saveBottomBtn = document.getElementById("btnSaveProfileBottom");
+    if (saveBottomBtn) {
+        saveBottomBtn.addEventListener("click", () => handleProfileSave(saveBottomBtn));
     }
 }
 
@@ -176,6 +264,49 @@ async function initializeSettingsPage() {
                 AureonAPI.showToast("Preferences saved to database!", "success");
             } else {
                 AureonAPI.showToast(res.message || "Failed to save settings.", "error");
+            }
+        });
+    }
+
+    // Handle Transfer Password Form in Settings
+    const trfPinForm = document.getElementById("formTransferPinSettings");
+    if (trfPinForm) {
+        trfPinForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const curPwd = document.getElementById("settingsCurrentTrfPwd").value;
+            const newPwd = document.getElementById("settingsNewTrfPwd").value;
+            const confPwd = document.getElementById("settingsConfirmTrfPwd").value;
+
+            if (newPwd !== confPwd) {
+                AureonAPI.showToast("New transfer passwords do not match.", "error");
+                return;
+            }
+
+            if (newPwd.length < 4) {
+                AureonAPI.showToast("Transfer password must be at least 4 characters.", "warning");
+                return;
+            }
+
+            const submitBtn = trfPinForm.querySelector("button[type='submit']");
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+            const res = await AureonAPI.request("/api/user/transfer-password", {
+                method: "POST",
+                body: JSON.stringify({
+                    current_password: curPwd,
+                    new_transfer_password: newPwd
+                })
+            });
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-key"></i> Update Transfer Password';
+
+            if (res.success) {
+                AureonAPI.showToast(res.message, "success");
+                trfPinForm.reset();
+            } else {
+                AureonAPI.showToast(res.message || "Failed to update transfer password.", "error");
             }
         });
     }

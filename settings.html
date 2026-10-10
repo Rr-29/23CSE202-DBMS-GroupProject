@@ -245,6 +245,63 @@
 
                 </div>
 
+                <div class="glass-card">
+
+                    <h2>
+                        <i class="fa-solid fa-shield-halved" style="color: #2563EB;"></i>
+                        Transfer Password / PIN
+                    </h2>
+
+                    <form id="formTransferPinSettings">
+
+                        <div class="input-group">
+
+                            <label>Current Password</label>
+
+                            <input
+                                type="password"
+                                id="settingsCurrentTrfPwd"
+                                placeholder="Current password (default: 1234 or User@123)">
+                            <small style="color: #64748B; font-size: 0.78rem;">Default is <code>1234</code> or your account login password.</small>
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>New Transfer Password</label>
+
+                            <input
+                                type="password"
+                                id="settingsNewTrfPwd"
+                                placeholder="New transfer password / PIN (min 4 chars)"
+                                required>
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>Confirm New Transfer Password</label>
+
+                            <input
+                                type="password"
+                                id="settingsConfirmTrfPwd"
+                                placeholder="Confirm new transfer password"
+                                required>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary">
+
+                            <i class="fa-solid fa-key"></i> Update Transfer Password
+
+                        </button>
+
+                    </form>
+
+                </div>
+
             </section>
 
             <section class="dashboard-grid">

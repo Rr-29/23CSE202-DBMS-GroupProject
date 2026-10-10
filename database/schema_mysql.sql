@@ -40,6 +40,7 @@ CREATE TABLE login_credentials (
     user_id INT NOT NULL UNIQUE,
     username VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
+    transfer_password_hash VARCHAR(255) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     last_login DATETIME NULL,
     failed_attempts INT DEFAULT 0,
@@ -54,7 +55,7 @@ CREATE TABLE login_credentials (
 CREATE TABLE profiles (
     profile_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL UNIQUE,
-    profile_picture VARCHAR(255) DEFAULT 'assets/images/profile.png',
+    profile_picture LONGTEXT,
     occupation VARCHAR(100) DEFAULT 'Professional',
     preferred_language VARCHAR(50) DEFAULT 'English (US)',
     bio TEXT,

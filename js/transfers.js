@@ -69,6 +69,20 @@ async function initializeTransferPage() {
         }
     }
 
+    // Password toggle for transfer password
+    const toggleBtn = document.getElementById("toggleTransferPassword");
+    const pwdInput = document.getElementById("transferPassword");
+    if (toggleBtn && pwdInput) {
+        toggleBtn.addEventListener("click", () => {
+            const isPassword = pwdInput.type === "password";
+            pwdInput.type = isPassword ? "text" : "password";
+            const icon = toggleBtn.querySelector("i");
+            if (icon) {
+                icon.className = isPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
+            }
+        });
+    }
+
     // 3. Handle Form Submission
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -78,6 +92,7 @@ async function initializeTransferPage() {
         const amount = parseFloat(document.getElementById("amount").value);
         const purpose = document.getElementById("purpose") ? document.getElementById("purpose").value : "Personal";
         const remarks = document.getElementById("remarks") ? document.getElementById("remarks").value : "";
+        const transferPassword = document.getElementById("transferPassword") ? document.getElementById("transferPassword").value.trim() : "";
 
         if (!sourceAccount) {
             AureonAPI.showToast("Please choose a source account to debit.", "warning");
@@ -94,11 +109,18 @@ async function initializeTransferPage() {
             return;
         }
 
+        if (!transferPassword) {
+            AureonAPI.showToast("Please enter your Transfer Password / PIN to authorize.", "warning");
+            const pwField = document.getElementById("transferPassword");
+            if (pwField) pwField.focus();
+            return;
+        }
+
         // Submit to API
         const submitBtn = form.querySelector("button[type='submit']");
         const originalText = submitBtn.innerHTML;
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing Transaction...';
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Authorizing & Processing...';
 
         const result = await AureonAPI.request("/api/transfers/execute", {
             method: "POST",
@@ -107,7 +129,8 @@ async function initializeTransferPage() {
                 beneficiary_id: beneficiaryId,
                 amount: amount,
                 purpose: purpose,
-                remarks: remarks
+                remarks: remarks,
+                transfer_password: transferPassword
             })
         });
 
@@ -121,7 +144,7 @@ async function initializeTransferPage() {
             // Refresh account dropdown balances
             initializeTransferPage();
         } else {
-            AureonAPI.showToast(result.message, "error");
+            AureonAPI.showToast(result.message || "Transfer declined.", "error");
         }
     });
 }
@@ -256,3 +279,106 @@ async function initializeTransactionsPage() {
         });
     }
 }
+
+// =====================================================================
+// QUICK PAY TEAMMATE & TRANSFER PASSWORD MODAL HELPERS
+// =====================================================================
+
+window.selectTeammateRecipient = function(accNo, name) {
+    const benSelect = document.getElementById("beneficiary");
+    if (!benSelect) return;
+
+    let opt = Array.from(benSelect.options).find(o => o.value === accNo || o.textContent.includes(accNo.slice(-4)));
+    if (!opt) {
+        opt = document.createElement("option");
+        opt.value = accNo;
+        opt.textContent = `${name} (${accNo})`;
+        benSelect.appendChild(opt);
+    }
+    benSelect.value = opt.value;
+    AureonAPI.showToast(`Selected payee: ${name}`, "info");
+};
+
+window.openTransferPasswordModal = function() {
+    let modal = document.getElementById("transferPasswordModal");
+    if (modal) modal.remove();
+
+    modal = document.createElement("div");
+    modal.id = "transferPasswordModal";
+    modal.className = "modal active";
+    modal.innerHTML = `
+        <div class="modal-content" style="max-width: 460px; padding: 26px; border-radius: 16px;">
+            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+                <div>
+                    <h3 style="color: #1E3A8A; margin: 0; font-size: 1.25rem;">
+                        <i class="fa-solid fa-shield-halved" style="color: #2563EB;"></i> Set / Edit Transfer Password
+                    </h3>
+                    <small style="color: #64748B;">Used to authorize all outgoing fund transfers</small>
+                </div>
+                <button type="button" class="modal-close" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #64748B;" onclick="document.getElementById('transferPasswordModal').remove()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="editTransferPasswordForm">
+                <div class="input-group" style="margin-bottom: 14px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9rem;">Current Password (or Login Password)</label>
+                    <input type="password" id="curTransferPwd" placeholder="Enter current password (default: 1234 or User@123)" style="width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px; font-size: 0.95rem;">
+                    <small style="color: #64748B; font-size: 0.78rem;">Default is <code>1234</code> or your account login password.</small>
+                </div>
+                <div class="input-group" style="margin-bottom: 14px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9rem;">New Transfer Password / Security PIN</label>
+                    <input type="password" id="newTransferPwd" placeholder="Create new transfer password (min 4 chars)" required style="width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px; font-size: 0.95rem;">
+                </div>
+                <div class="input-group" style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.9rem;">Confirm New Transfer Password</label>
+                    <input type="password" id="confirmTransferPwd" placeholder="Confirm new transfer password" required style="width: 100%; padding: 12px; border: 1px solid #CBD5E1; border-radius: 10px; font-size: 0.95rem;">
+                </div>
+                <button type="submit" class="btn btn-primary full-width" style="padding: 12px; font-weight: 600; font-size: 0.95rem; border-radius: 10px;">
+                    <i class="fa-solid fa-floppy-disk"></i> Save Transfer Password
+                </button>
+            </form>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    document.getElementById("editTransferPasswordForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const curPwd = document.getElementById("curTransferPwd").value;
+        const newPwd = document.getElementById("newTransferPwd").value;
+        const confPwd = document.getElementById("confirmTransferPwd").value;
+
+        if (newPwd !== confPwd) {
+            AureonAPI.showToast("New passwords do not match.", "error");
+            return;
+        }
+
+        if (newPwd.length < 4) {
+            AureonAPI.showToast("Password must be at least 4 characters.", "warning");
+            return;
+        }
+
+        const submitBtn = e.target.querySelector("button[type='submit']");
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+        const res = await AureonAPI.request("/api/user/transfer-password", {
+            method: "POST",
+            body: JSON.stringify({
+                current_password: curPwd,
+                new_transfer_password: newPwd
+            })
+        });
+
+        if (res.success) {
+            AureonAPI.showToast(res.message, "success");
+            modal.remove();
+            // Pre-fill the transfer password field on the page
+            const pagePw = document.getElementById("transferPassword");
+            if (pagePw) pagePw.value = newPwd;
+        } else {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Transfer Password';
+            AureonAPI.showToast(res.message || "Failed to update transfer password.", "error");
+        }
+    });
+};

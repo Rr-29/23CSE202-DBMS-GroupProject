@@ -74,9 +74,20 @@ const AureonAPI = (() => {
             ...(options.headers || {})
         };
 
+        let reqBody = options.body;
+        if (reqBody && typeof reqBody === "string" && (!options.headers || options.headers["Content-Type"] !== "multipart/form-data")) {
+            try {
+                const parsed = JSON.parse(reqBody);
+                if (user && user.id && !parsed.user_id) {
+                    parsed.user_id = user.id;
+                    reqBody = JSON.stringify(parsed);
+                }
+            } catch (e) {}
+        }
+
         const url = `${API_BASE}${endpoint}`;
         try {
-            const response = await fetch(url, { ...options, headers });
+            const response = await fetch(url, { ...options, headers, body: reqBody });
             const data = await response.json();
             return data;
         } catch (error) {
@@ -94,29 +105,52 @@ const AureonAPI = (() => {
         if (!container) {
             container = document.createElement("div");
             container.className = "toast-container";
+            container.style.position = "fixed";
+            container.style.top = "20px";
+            container.style.right = "20px";
+            container.style.zIndex = "999999";
+            container.style.display = "flex";
+            container.style.flexDirection = "column";
+            container.style.gap = "12px";
+            container.style.pointerEvents = "none";
             document.body.appendChild(container);
         }
 
         const iconClass = type === "success" ? "fa-circle-check" : 
                           type === "error" ? "fa-circle-xmark" : 
                           type === "warning" ? "fa-triangle-exclamation" : "fa-circle-info";
+        const borderColor = type === "success" ? "#10B981" : 
+                            type === "error" ? "#EF4444" : 
+                            type === "warning" ? "#F59E0B" : "#2563EB";
 
         const toast = document.createElement("div");
         toast.className = `toast ${type}`;
+        toast.style.minWidth = "300px";
+        toast.style.maxWidth = "440px";
+        toast.style.background = "#ffffff";
+        toast.style.borderRadius = "12px";
+        toast.style.padding = "14px 18px";
+        toast.style.boxShadow = "0 10px 25px rgba(0,0,0,0.18)";
+        toast.style.display = "flex";
+        toast.style.alignItems = "flex-start";
+        toast.style.gap = "14px";
+        toast.style.borderLeft = `5px solid ${borderColor}`;
+        toast.style.pointerEvents = "auto";
+        toast.style.transition = "all 0.35s ease";
+
         toast.innerHTML = `
-            <i class="fa-solid ${iconClass}"></i>
-            <div>
-                <strong>${type.charAt(0).toUpperCase() + type.slice(1)}</strong>
-                <p style="margin: 0; font-size: 0.9rem; color: #4B5563;">${message}</p>
+            <i class="fa-solid ${iconClass}" style="color: ${borderColor}; font-size: 1.3rem; margin-top: 2px;"></i>
+            <div style="flex: 1;">
+                <strong style="display: block; font-size: 0.95rem; color: #1F2937; margin-bottom: 2px;">${type.charAt(0).toUpperCase() + type.slice(1)}</strong>
+                <p style="margin: 0; font-size: 0.88rem; color: #4B5563; line-height: 1.4;">${message}</p>
             </div>
         `;
         container.appendChild(toast);
 
         setTimeout(() => {
             toast.style.opacity = "0";
-            toast.style.transform = "translateX(20px)";
-            toast.style.transition = "all 0.3s ease";
-            setTimeout(() => toast.remove(), 300);
+            toast.style.transform = "translateX(30px)";
+            setTimeout(() => toast.remove(), 350);
         }, 4000);
     }
 

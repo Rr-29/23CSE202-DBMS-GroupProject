@@ -191,17 +191,18 @@ $$(".modal-close").forEach(button => {
 });
 
 function showToast(message, type = "success") {
-
+    if (typeof AureonAPI !== "undefined" && AureonAPI.showToast) {
+        return AureonAPI.showToast(message, type);
+    }
     let container = document.querySelector(".toast-container");
-
     if (!container) {
-
         container = document.createElement("div");
-
         container.className = "toast-container";
-
+        container.style.position = "fixed";
+        container.style.top = "20px";
+        container.style.right = "20px";
+        container.style.zIndex = "999999";
         document.body.appendChild(container);
-
     }
 
     const toast = document.createElement("div");
