@@ -1,14 +1,3 @@
-"""
-=====================================================================
-Course: 23CSE202 Database Management Systems
-Project: Aureon - Internet Banking System
-Group No: D4 (Amrita School of Computing, Amritapuri Campus)
-
-MODULE: User Identity, Authentication, Profile & Settings
-CONTRIBUTOR: Mehrin A S (Roll No: AM.SC.U4CSE25332)
-Entities Managed: USERS, LOGIN_CREDENTIALS, PROFILES, SETTINGS
-=====================================================================
-"""
 
 from flask import Blueprint, request, jsonify
 from database.db import db, hash_password, verify_password
