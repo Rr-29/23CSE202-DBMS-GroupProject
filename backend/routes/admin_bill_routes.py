@@ -1,14 +1,4 @@
-"""
-=====================================================================
-Course: 23CSE202 Database Management Systems
-Project: Aureon - Internet Banking System
-Group No: D4 (Amrita School of Computing, Amritapuri Campus)
 
-MODULE: Utility Bills, Admin Console & Database Analytics
-CONTRIBUTOR: Varun Nair (Roll No: AM.SC.U4CSE25356)
-Entities Managed: BILLS, ADMINS, AUDIT_LOGS, Database Views & Metrics
-=====================================================================
-"""
 
 from flask import Blueprint, request, jsonify
 from database.db import db
@@ -16,9 +6,6 @@ import datetime
 
 admin_bill_bp = Blueprint('admin_bill_bp', __name__)
 
-# =====================================================================
-# BILLS MANAGEMENT (Varun Nair)
-# =====================================================================
 
 @admin_bill_bp.route('/api/bills', methods=['GET'])
 def get_bills():
@@ -62,9 +49,6 @@ def pay_bill(bill_id):
     return jsonify(result), status_code
 
 
-# =====================================================================
-# ADMIN DASHBOARD & AUDIT (Varun Nair)
-# =====================================================================
 
 @admin_bill_bp.route('/api/admin/metrics', methods=['GET'])
 def get_admin_metrics():
