@@ -1,14 +1,3 @@
-"""
-=====================================================================
-Course: 23CSE202 Database Management Systems
-Project: Aureon - Internet Banking System
-Group No: D4 (Amrita School of Computing, Amritapuri Campus)
-
-MODULE: Bank Accounts & Card Management Lifecycle
-CONTRIBUTOR: Nithya Ajay (Roll No: AM.SC.U4CSE25339)
-Entities Managed: ACCOUNTS, CARDS
-=====================================================================
-"""
 
 from flask import Blueprint, request, jsonify
 from database.db import db
