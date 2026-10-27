@@ -1,25 +1,9 @@
--- =====================================================================
--- Course: 23CSE202 Database Management Systems
--- Project: Aureon - Internet Banking System
--- Group No: D4 (Amrita School of Computing, Amritapuri Campus)
---
--- Contributors & Module Distribution:
---   1. Mehrin A S     (AM.SC.U4CSE25332) - User Auth, Credentials & Profile Module
---   2. Nithya Ajay     (AM.SC.U4CSE25339) - Accounts & Cards Management Module
---   3. Rudra Rajagopal (AM.SC.U4CSE25344) - Fund Transfers & ACID Transactions Module
---   4. Varun Nair      (AM.SC.U4CSE25356) - Utility Bills, Admin Console & Triggers Module
---
--- Relational Schema: 3NF & BCNF Compliant
--- Target Database: MySQL 8.0+
--- =====================================================================
+
 
 DROP DATABASE IF EXISTS aureon_db;
 CREATE DATABASE aureon_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE aureon_db;
 
--- ---------------------------------------------------------------------
--- 1. USERS TABLE (Core Identity) - Module: Mehrin A S
--- ---------------------------------------------------------------------
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
@@ -32,9 +16,7 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 2. LOGIN_CREDENTIALS TABLE (Separated Auth Entity) - Module: Mehrin A S
--- ---------------------------------------------------------------------
+
 CREATE TABLE login_credentials (
     login_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL UNIQUE,
@@ -49,9 +31,7 @@ CREATE TABLE login_credentials (
         REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 3. PROFILES TABLE (User Profile Information) - Module: Mehrin A S
--- ---------------------------------------------------------------------
+
 CREATE TABLE profiles (
     profile_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL UNIQUE,
@@ -64,9 +44,7 @@ CREATE TABLE profiles (
         REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 4. SETTINGS TABLE (User Preferences) - Module: Mehrin A S
--- ---------------------------------------------------------------------
+
 CREATE TABLE settings (
     settings_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL UNIQUE,
@@ -80,9 +58,7 @@ CREATE TABLE settings (
         REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 5. ACCOUNTS TABLE (Bank Accounts) - Module: Nithya Ajay
--- ---------------------------------------------------------------------
+
 CREATE TABLE accounts (
     account_no VARCHAR(20) PRIMARY KEY,
     user_id INT NOT NULL,
@@ -97,9 +73,7 @@ CREATE TABLE accounts (
         REFERENCES users(user_id) ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 6. CARDS TABLE (Debit / Credit / Virtual Cards) - Module: Nithya Ajay
--- ---------------------------------------------------------------------
+
 CREATE TABLE cards (
     card_id INT AUTO_INCREMENT PRIMARY KEY,
     account_no VARCHAR(20) NOT NULL,
@@ -122,9 +96,7 @@ CREATE TABLE cards (
         REFERENCES accounts(account_no) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 7. BENEFICIARIES TABLE (Transfer Recipients) - Module: Rudra Rajagopal
--- ---------------------------------------------------------------------
+
 CREATE TABLE beneficiaries (
     beneficiary_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -139,9 +111,7 @@ CREATE TABLE beneficiaries (
         REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 8. BILLS TABLE (Utility & Services Billing) - Module: Varun Nair
--- ---------------------------------------------------------------------
+
 CREATE TABLE bills (
     bill_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -161,9 +131,7 @@ CREATE TABLE bills (
         REFERENCES accounts(account_no) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 9. TRANSACTIONS TABLE (Authoritative Financial Events) - Module: Rudra Rajagopal
--- ---------------------------------------------------------------------
+
 CREATE TABLE transactions (
     transaction_id INT AUTO_INCREMENT PRIMARY KEY,
     account_no VARCHAR(20) NOT NULL,
@@ -180,9 +148,7 @@ CREATE TABLE transactions (
         REFERENCES accounts(account_no) ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 10. TRANSFERS TABLE (Ternary Relationship: Source, Beneficiary, Txn) - Module: Rudra Rajagopal
--- ---------------------------------------------------------------------
+
 CREATE TABLE transfers (
     transfer_id INT AUTO_INCREMENT PRIMARY KEY,
     source_account_no VARCHAR(20) NOT NULL,
@@ -202,9 +168,7 @@ CREATE TABLE transfers (
         REFERENCES transactions(transaction_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 11. TRANSACTION_HISTORY TABLE (Weak Entity Dependent on Transaction) - Module: Rudra Rajagopal
--- ---------------------------------------------------------------------
+
 CREATE TABLE transaction_history (
     history_id INT AUTO_INCREMENT,
     transaction_id INT NOT NULL,
@@ -219,9 +183,7 @@ CREATE TABLE transaction_history (
         REFERENCES transactions(transaction_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 12. ADMIN TABLE (Administrative Management) - Module: Varun Nair
--- ---------------------------------------------------------------------
+
 CREATE TABLE admins (
     admin_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) NOT NULL UNIQUE,
@@ -235,9 +197,7 @@ CREATE TABLE admins (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------------------
--- 13. AUDIT_LOGS TABLE (Security & Compliance Tracking) - Module: Varun Nair
--- ---------------------------------------------------------------------
+
 CREATE TABLE audit_logs (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
     actor_type ENUM('User', 'Admin', 'System') NOT NULL,
@@ -250,11 +210,8 @@ CREATE TABLE audit_logs (
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- =====================================================================
--- DATABASE VIEWS (Relational Abstractions)
--- =====================================================================
 
--- View 1: Customer Overview (Aggregates balances and entity counts) - Module: Nithya Ajay
+
 CREATE OR REPLACE VIEW vw_customer_overview AS
 SELECT 
     u.user_id,
@@ -271,7 +228,7 @@ LEFT JOIN cards c ON a.account_no = c.account_no AND c.status = 'Active'
 LEFT JOIN bills b ON u.user_id = b.user_id AND b.status = 'Unpaid'
 GROUP BY u.user_id, u.full_name, u.email, u.phone_no;
 
--- View 2: Transfer Ledger (Complete audit view for transfers) - Module: Rudra Rajagopal
+
 CREATE OR REPLACE VIEW vw_transfer_ledger AS
 SELECT 
     t.transfer_id,
@@ -292,7 +249,7 @@ JOIN users u ON a.user_id = u.user_id
 JOIN transactions tx ON t.transaction_id = tx.transaction_id
 LEFT JOIN beneficiaries b ON t.beneficiary_id = b.beneficiary_id;
 
--- View 3: Admin System Metrics (High level KPI metrics) - Module: Varun Nair
+
 CREATE OR REPLACE VIEW vw_admin_system_metrics AS
 SELECT 
     (SELECT COUNT(*) FROM users WHERE user_type = 'Customer') AS total_customers,
@@ -302,7 +259,7 @@ SELECT
     (SELECT COALESCE(SUM(amount), 0.00) FROM transactions WHERE DATE(transaction_time) = CURDATE()) AS today_volume,
     (SELECT COUNT(*) FROM bills WHERE status = 'Unpaid') AS total_pending_bills;
 
--- View 4: Pending Bills Summary - Module: Varun Nair
+
 CREATE OR REPLACE VIEW vw_pending_bills AS
 SELECT 
     b.bill_id,
@@ -320,13 +277,11 @@ JOIN users u ON b.user_id = u.user_id
 WHERE b.status = 'Unpaid'
 ORDER BY b.due_date ASC;
 
--- =====================================================================
--- STORED PROCEDURES (ACID Encapsulation)
--- =====================================================================
+
 
 DELIMITER $$
 
--- Procedure 1: Process Fund Transfer (Ternary Relationship Execution) - Module: Rudra Rajagopal
+
 CREATE PROCEDURE sp_process_transfer(
     IN p_source_acc VARCHAR(20),
     IN p_beneficiary_id INT,
@@ -436,7 +391,7 @@ proc_label: BEGIN
 END $$
 
 
--- Procedure 2: Pay Utility Bill - Module: Varun Nair
+
 CREATE PROCEDURE sp_pay_bill(
     IN p_user_id INT,
     IN p_bill_id INT,
@@ -516,7 +471,7 @@ bill_label: BEGIN
 END $$
 
 
--- Procedure 3: Open New Account - Module: Nithya Ajay
+
 CREATE PROCEDURE sp_open_account(
     IN p_user_id INT,
     IN p_account_type VARCHAR(20),
@@ -550,7 +505,6 @@ DELIMITER ;
 
 DELIMITER $$
 
--- Trigger 1: Record Transaction History Weak Entity Automatically - Module: Rudra Rajagopal
 CREATE TRIGGER trg_record_transaction_history
 AFTER INSERT ON transactions
 FOR EACH ROW
@@ -563,7 +517,7 @@ BEGIN
     );
 END $$
 
--- Trigger 2: Prevent Negative Balance Safety Net - Module: Nithya Ajay
+
 CREATE TRIGGER trg_prevent_negative_balance
 BEFORE UPDATE ON accounts
 FOR EACH ROW
@@ -574,7 +528,7 @@ BEGIN
     END IF;
 END $$
 
--- Trigger 3: Audit Transfers on Insert - Module: Varun Nair
+
 CREATE TRIGGER trg_audit_transfer_insert
 AFTER INSERT ON transfers
 FOR EACH ROW
@@ -587,7 +541,7 @@ BEGIN
     );
 END $$
 
--- Trigger 4: Track Login Attempts - Module: Mehrin A S
+
 CREATE TRIGGER trg_after_login_update
 AFTER UPDATE ON login_credentials
 FOR EACH ROW
