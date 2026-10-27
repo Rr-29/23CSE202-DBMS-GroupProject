@@ -5,16 +5,7 @@
 
 ---
 
-## 👥 Group D4 Team Contributors & Module Division
 
-| Roll Number | Contributor | Module Ownership | Key Responsibilities |
-| :--- | :--- | :--- | :--- |
-| **AM.SC.U4CSE25332** | **Mehrin A S** | User Identity, Authentication & Profile | User registration, 1:1 credential separation, password hashing, profiles, settings, session verification. |
-| **AM.SC.U4CSE25339** | **Nithya Ajay** | Accounts & Cards Lifecycle Management | Multi-account ledgers (Savings/Checking/FD), card provisioning, daily limits, freeze/unfreeze state toggles. |
-| **AM.SC.U4CSE25344** | **Rudra Rajagopal** | Fund Transfers & ACID Transactions | Ternary transfer relationship engine, atomic balance conservation, beneficiaries, live transaction ledger. |
-| **AM.SC.U4CSE25356** | **Varun Nair** | Bills, Admin Console & Database Triggers | Utility bill settlement, admin oversight console, database views, triggers, and security compliance audit logs. |
-
----
 
 ## 🚀 Quick Start Guide (Run in 10 Seconds)
 
